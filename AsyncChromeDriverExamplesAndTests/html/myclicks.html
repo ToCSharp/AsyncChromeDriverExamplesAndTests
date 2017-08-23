@@ -1,0 +1,23 @@
+<html>
+<head>
+    <title>clicks</title>
+
+    <script type="text/javascript" src="js/jquery-1.4.4.min.js"></script>
+    <script type="text/javascript" src="js/jquery-ui-1.8.10.custom.min.js"></script>
+    <script type="text/javascript">
+        jQuery(document).ready(function () {
+            $('#normal').click(function (e) {
+                alert("click pos = " + e.pageX + "," + e.pageY);
+            });
+        })
+
+    </script>
+</head>
+<body>
+    <h1>Testing Clicks</h1>
+    <br>
+    <a href="ok.html" id="normal">I'm a normal link</a>
+    <br>
+
+</body>
+</html>

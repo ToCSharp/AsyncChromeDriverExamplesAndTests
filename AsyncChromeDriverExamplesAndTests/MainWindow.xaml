@@ -1,0 +1,58 @@
+﻿<Window x:Class="AsyncChromeDriverExamplesAndTests.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AsyncChromeDriverExamplesAndTests"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="350" Width="525" Closing="Window_Closing">
+    <Grid>
+        <TabControl>
+            <TabItem Header="Open">
+                <Grid Background="#FFE5E5E5">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="91*"/>
+                        <RowDefinition Height="200*"/>
+                    </Grid.RowDefinitions>
+                    <TextBox x:Name="tbOpenProfileDir" HorizontalAlignment="Left" Height="23" Margin="23,31,0,0" TextWrapping="Wrap" Text="C:\Chrome\profiles\prof1" VerticalAlignment="Top" Width="242"/>
+                    <Button Content="open profile with user dir" HorizontalAlignment="Left" Margin="278,34,0,0" VerticalAlignment="Top" Width="177" Click="OpenTab_Button_Click_9" Height="20"/>
+                    <TextBox x:Name="tbDevToolsRes2" Grid.Row="1" TextWrapping="Wrap" Text="TextBox"/>
+                    <Button Content="close" HorizontalAlignment="Left" Margin="210,6,0,0" VerticalAlignment="Top" Width="123" Click="OpenTab_Button_Click_1" Height="20"/>
+                    <TextBox x:Name="tbOpenProfilePort" HorizontalAlignment="Left" Height="23" Margin="30,59,0,0" TextWrapping="Wrap" Text="7777" VerticalAlignment="Top" Width="120"/>
+                    <Button Content="open temp profile" HorizontalAlignment="Left" Margin="30,6,0,0" VerticalAlignment="Top" Width="141" Height="20" Click="OpenTab_Button_Click"/>
+                    <Button Content="open profile with user dir and port" HorizontalAlignment="Left" Margin="162,59,0,0" VerticalAlignment="Top" Width="203" Click="OpenTab_Button_Click_10"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Mouse">
+                <Grid Background="#FFE5E5E5">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="87"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <TextBox x:Name="tbMouseX1" HorizontalAlignment="Left" Height="23" Margin="31,33,0,0" TextWrapping="Wrap" Text="50" VerticalAlignment="Top" Width="40"/>
+                    <TextBox x:Name="tbMouseY1" HorizontalAlignment="Left" Height="23" Margin="89,33,0,0" TextWrapping="Wrap" Text="110" VerticalAlignment="Top" Width="47"/>
+                    <Button Content="move" HorizontalAlignment="Left" Margin="141,36,0,0" VerticalAlignment="Top" Width="75" Click="MouseTab_Button_Click_3" Height="20"/>
+                    <Button Content="mousePositionTracker.html" HorizontalAlignment="Left" Margin="31,10,0,0" VerticalAlignment="Top" Width="165" Click="MouseTab_Button_Click_1" Height="20"/>
+                    <Button Content="div rect info" HorizontalAlignment="Left" Margin="216,10,0,0" VerticalAlignment="Top" Width="81" Click="MouseTab_Button_Click_2" Height="20"/>
+                    <TextBox x:Name="tbMouseInfo" Grid.Row="1" TextWrapping="Wrap"/>
+                    <TextBlock HorizontalAlignment="Left" Margin="15,36,0,0" TextWrapping="Wrap" Text="X" VerticalAlignment="Top" Height="16" Width="7"/>
+                    <TextBlock HorizontalAlignment="Left" Margin="77,36,0,0" TextWrapping="Wrap" Text="Y" VerticalAlignment="Top" Height="16" Width="7"/>
+                    <Button Content="move to location in div" HorizontalAlignment="Left" Margin="221,36,0,0" VerticalAlignment="Top" Width="141" Height="20" Click="MouseTab_Button_Click_4"/>
+                    <Button Content="click" HorizontalAlignment="Left" Margin="375,36,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Clicks" IsSelected="True">
+                <Grid Background="#FFE5E5E5">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="29*"/>
+                        <RowDefinition Height="68*"/>
+                    </Grid.RowDefinitions>
+                    <Button Content="myclicks.html" HorizontalAlignment="Left" Margin="30,10,0,0" VerticalAlignment="Top" Width="91" Click="Button_Click_1"/>
+                    <Button Content="click normal link" HorizontalAlignment="Left" Margin="145,10,0,0" VerticalAlignment="Top" Width="111" Click="Button_Click_2"/>
+                    <TextBox x:Name="tbClicksInfo" Grid.Row="1" TextWrapping="Wrap"/>
+                </Grid>
+            </TabItem>
+        </TabControl>
+
+    </Grid>
+</Window>
