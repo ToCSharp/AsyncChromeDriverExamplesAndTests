@@ -185,7 +185,7 @@ namespace AsyncChromeDriverExamplesAndTests
             if (webDriver == null) return;
             var link = await webDriver.FindElementById("normal");
 
-            var text = ""; // await link.Text();
+            var text = await link.Text();
             var location = await link.Location();
             var size = await link.Size();
 
