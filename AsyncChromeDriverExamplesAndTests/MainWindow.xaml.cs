@@ -45,7 +45,15 @@ namespace AsyncChromeDriverExamplesAndTests
         {
             try
             {
-                asyncChromeDriver = new AsyncChromeDriver();
+                if (chbOpenProfileHeadless.IsChecked == true)
+                {
+                    var width = 1200;
+                    var height = 900;
+                    int.TryParse(tbOpenProfileHeadlessWidth.Text, out width);
+                    int.TryParse(tbOpenProfileHeadlessHeight.Text, out height);
+                    asyncChromeDriver = new AsyncChromeDriver(new ChromeDriverConfig().SetHeadless().SetWindowSize(width, height).SetIsTempUserDir());
+                }
+                else asyncChromeDriver = new AsyncChromeDriver();
                 webDriver = new WebDriver(asyncChromeDriver);
                 await asyncChromeDriver.Connect();
                 tbDevToolsRes2.Text = $"opened on port {asyncChromeDriver.Port} in dir {asyncChromeDriver.UserDir} \nWhen close, dir will be DELETED";
@@ -70,7 +78,15 @@ namespace AsyncChromeDriverExamplesAndTests
             var userDir = tbOpenProfileDir.Text;
             try
             {
-                asyncChromeDriver = new AsyncChromeDriver(userDir);
+                if (chbOpenProfileHeadless.IsChecked == true)
+                {
+                    var width = 1200;
+                    var height = 900;
+                    int.TryParse(tbOpenProfileHeadlessWidth.Text, out width);
+                    int.TryParse(tbOpenProfileHeadlessHeight.Text, out height);
+                    asyncChromeDriver = new AsyncChromeDriver(new ChromeDriverConfig().SetHeadless().SetWindowSize(width, height).SetUserDir(userDir));
+                }
+                else asyncChromeDriver = new AsyncChromeDriver(userDir);
                 webDriver = new WebDriver(asyncChromeDriver);
                 // await asyncChromeDriver.Connect(); // browser opens here
                 await webDriver.GoToUrl("https://www.google.com/"); // browser opens here
@@ -91,7 +107,15 @@ namespace AsyncChromeDriverExamplesAndTests
             {
                 try
                 {
-                    asyncChromeDriver = new AsyncChromeDriver(userDir, port);
+                    if (chbOpenProfileHeadless.IsChecked == true)
+                    {
+                        var width = 1200;
+                        var height = 900;
+                        int.TryParse(tbOpenProfileHeadlessWidth.Text, out width);
+                        int.TryParse(tbOpenProfileHeadlessHeight.Text, out height);
+                        asyncChromeDriver = new AsyncChromeDriver(new ChromeDriverConfig().SetHeadless().SetWindowSize(width, height).SetUserDir(userDir).SetPort(port));
+                    }
+                    else asyncChromeDriver = new AsyncChromeDriver(userDir, port);
                     webDriver = new WebDriver(asyncChromeDriver);
                     // await asyncChromeDriver.Connect(); // browser opens here
                     await webDriver.GoToUrl("https://www.google.com/"); // browser opens here
@@ -102,6 +126,31 @@ namespace AsyncChromeDriverExamplesAndTests
                 {
                     tbDevToolsRes2.Text = ex.ToString();
                 }
+            }
+        }
+
+        private async void OpenTab_Button_Click_12(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                if (chbOpenProfileHeadless.IsChecked == true)
+                {
+                    var width = 1200;
+                    var height = 900;
+                    int.TryParse(tbOpenProfileHeadlessWidth.Text, out width);
+                    int.TryParse(tbOpenProfileHeadlessHeight.Text, out height);
+                    asyncChromeDriver = new AsyncChromeDriver(new ChromeDriverConfig().SetHeadless().SetWindowSize(width, height));
+                }
+                else asyncChromeDriver = new AsyncChromeDriver(new ChromeDriverConfig());
+                webDriver = new WebDriver(asyncChromeDriver);
+                await asyncChromeDriver.Connect(); // browser opens here
+                                                   // await webDriver.GoToUrl("https://www.google.com/"); // browser opens here
+                var mess = $"opened on port {asyncChromeDriver.Port} in dir {asyncChromeDriver.UserDir} \nWhen close, dir will NOT be deleted";
+                tbDevToolsRes2.Text = mess;
+            }
+            catch (Exception ex)
+            {
+                tbDevToolsRes2.Text = ex.ToString();
             }
         }
         #endregion
@@ -195,5 +244,6 @@ namespace AsyncChromeDriverExamplesAndTests
                                 $"link location = \"{location}\"" + Environment.NewLine +
                                 $"link size = \"{size}\"" + Environment.NewLine + tbClicksInfo.Text;
         }
+
     }
 }

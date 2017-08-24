@@ -16,11 +16,15 @@
                     </Grid.RowDefinitions>
                     <TextBox x:Name="tbOpenProfileDir" HorizontalAlignment="Left" Height="23" Margin="23,31,0,0" TextWrapping="Wrap" Text="C:\Chrome\profiles\prof1" VerticalAlignment="Top" Width="242"/>
                     <Button Content="open profile with user dir" HorizontalAlignment="Left" Margin="278,34,0,0" VerticalAlignment="Top" Width="177" Click="OpenTab_Button_Click_9" Height="20"/>
-                    <TextBox x:Name="tbDevToolsRes2" Grid.Row="1" TextWrapping="Wrap" Text="TextBox"/>
-                    <Button Content="close" HorizontalAlignment="Left" Margin="210,6,0,0" VerticalAlignment="Top" Width="123" Click="OpenTab_Button_Click_1" Height="20"/>
-                    <TextBox x:Name="tbOpenProfilePort" HorizontalAlignment="Left" Height="23" Margin="30,59,0,0" TextWrapping="Wrap" Text="7777" VerticalAlignment="Top" Width="120"/>
-                    <Button Content="open temp profile" HorizontalAlignment="Left" Margin="30,6,0,0" VerticalAlignment="Top" Width="141" Height="20" Click="OpenTab_Button_Click"/>
-                    <Button Content="open profile with user dir and port" HorizontalAlignment="Left" Margin="162,59,0,0" VerticalAlignment="Top" Width="203" Click="OpenTab_Button_Click_10"/>
+                    <TextBox x:Name="tbDevToolsRes2" Grid.Row="1" TextWrapping="Wrap"/>
+                    <Button Content="close" HorizontalAlignment="Left" Margin="178,6,0,0" VerticalAlignment="Top" Width="79" Click="OpenTab_Button_Click_1" Height="20"/>
+                    <TextBox x:Name="tbOpenProfilePort" HorizontalAlignment="Left" Height="23" Margin="23,59,0,0" TextWrapping="Wrap" Text="7777" VerticalAlignment="Top" Width="61"/>
+                    <Button Content="open temp profile" HorizontalAlignment="Left" Margin="23,6,0,0" VerticalAlignment="Top" Width="141" Height="20" Click="OpenTab_Button_Click"/>
+                    <Button Content="open profile with user dir and port" HorizontalAlignment="Left" Margin="89,59,0,0" VerticalAlignment="Top" Width="203" Click="OpenTab_Button_Click_10"/>
+                    <CheckBox x:Name="chbOpenProfileHeadless" Content="Headless" HorizontalAlignment="Left" Margin="291,10,0,0" VerticalAlignment="Top"/>
+                    <TextBox x:Name="tbOpenProfileHeadlessWidth" HorizontalAlignment="Left" Height="23" Margin="365,5,0,0" TextWrapping="Wrap" Text="1200" VerticalAlignment="Top" Width="55"/>
+                    <TextBox x:Name="tbOpenProfileHeadlessHeight" HorizontalAlignment="Left" Height="23" Margin="428,5,0,0" TextWrapping="Wrap" Text="900" VerticalAlignment="Top" Width="40"/>
+                    <Button Content="default profile" HorizontalAlignment="Left" Margin="312,59,0,0" VerticalAlignment="Top" Width="143" Click="OpenTab_Button_Click_12"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Mouse">
