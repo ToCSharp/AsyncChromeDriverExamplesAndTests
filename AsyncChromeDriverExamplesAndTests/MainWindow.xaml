@@ -56,6 +56,19 @@
                     <TextBox x:Name="tbClicksInfo" Grid.Row="1" TextWrapping="Wrap"/>
                 </Grid>
             </TabItem>
+            <TabItem Header="Dialogs">
+                <Grid Background="#FFE5E5E5"/>
+            </TabItem>
+            <TabItem Header="Page">
+                <Grid Background="#FFE5E5E5">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="61*"/>
+                        <RowDefinition Height="230*"/>
+                    </Grid.RowDefinitions>
+                    <Button Content="listen events" HorizontalAlignment="Left" Margin="62,29,0,0" VerticalAlignment="Top" Width="97" Click="Button_Click_3"/>
+                    <TextBox x:Name="tbPage" Grid.Row="1" TextWrapping="Wrap"/>
+                </Grid>
+            </TabItem>
         </TabControl>
 
     </Grid>

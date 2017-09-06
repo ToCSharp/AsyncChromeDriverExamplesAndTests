@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -12,6 +13,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
+using System.Windows.Threading;
 using Zu.AsyncWebDriver.Remote;
 using Zu.Chrome;
 using Zu.WebBrowser.BasicTypes;
@@ -51,7 +53,7 @@ namespace AsyncChromeDriverExamplesAndTests
                     var height = 900;
                     int.TryParse(tbOpenProfileHeadlessWidth.Text, out width);
                     int.TryParse(tbOpenProfileHeadlessHeight.Text, out height);
-                    asyncChromeDriver = new AsyncChromeDriver(new ChromeDriverConfig().SetHeadless().SetWindowSize(width, height).SetIsTempUserDir());
+                    asyncChromeDriver = new AsyncChromeDriver(new ChromeDriverConfig().SetHeadless().SetWindowSize(width, height).SetIsTempProfile());
                 }
                 else asyncChromeDriver = new AsyncChromeDriver();
                 webDriver = new WebDriver(asyncChromeDriver);
@@ -245,5 +247,25 @@ namespace AsyncChromeDriverExamplesAndTests
                                 $"link size = \"{size}\"" + Environment.NewLine + tbClicksInfo.Text;
         }
 
+        private async void Button_Click_3(object sender, RoutedEventArgs e)
+        {
+            if (webDriver == null)
+            {
+                asyncChromeDriver = new AsyncChromeDriver();
+                webDriver = new WebDriver(asyncChromeDriver);
+            }
+            await asyncChromeDriver.CheckConnected();
+            asyncChromeDriver.DevToolsEvent += AsyncChromeDriver_DevToolsEvent;
+            await asyncChromeDriver.DevTools.Session.Page.Enable();
+
+        }
+
+        private void AsyncChromeDriver_DevToolsEvent(object sender, string methodName, Newtonsoft.Json.Linq.JToken eventData)
+        {
+            Dispatcher.BeginInvoke(DispatcherPriority.Normal, (ThreadStart)delegate ()
+            {
+                tbPage.Text = $"{methodName}: {eventData.ToString()} {Environment.NewLine}" + tbPage.Text;
+            });
+        }
     }
 }
