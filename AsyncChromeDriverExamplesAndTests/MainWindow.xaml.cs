@@ -267,5 +267,40 @@ namespace AsyncChromeDriverExamplesAndTests
                 tbPage.Text = $"{methodName}: {eventData.ToString()} {Environment.NewLine}" + tbPage.Text;
             });
         }
+
+        private async void Button_Click_4(object sender, RoutedEventArgs e)
+        {
+            if (webDriver == null) return;
+            if (int.TryParse(tbMouseX1.Text, out int x) && int.TryParse(tbMouseY1.Text, out int y))
+            {
+                var clickLocation = new WebPoint(x, y);
+                await webDriver.Mouse.Click(clickLocation);
+
+            }
+
+        }
+
+        private async void Button_Click_5(object sender, RoutedEventArgs e)
+        {
+            if (webDriver == null)
+            {
+                asyncChromeDriver = new AsyncChromeDriver();
+                webDriver = new WebDriver(asyncChromeDriver);
+            }
+            await asyncChromeDriver.GoToUrl("chrome://settings/content/microphone");
+            //await asyncChromeDriver.WebView.EvaluateScript("chrome.send('setCategoryPermissionForOrigin', ['https://www.google.com:443', '', 'media-stream-mic', 'allow', false])");
+        }
+
+        private async void Button_Click_6(object sender, RoutedEventArgs e)
+        {
+            var site = tbSettingsSite.Text;
+            var incognito = chbIncognito.IsChecked == true;
+            await AddSiteMicPermission(site, incognito);
+        }
+
+        private async Task AddSiteMicPermission(string site, bool incognito)
+        {
+            await asyncChromeDriver.WebView.EvaluateScript($"chrome.send('setCategoryPermissionForOrigin', ['{site}', '', 'media-stream-mic', 'allow', {incognito.ToString().ToLower()}])");
+        }
     }
 }

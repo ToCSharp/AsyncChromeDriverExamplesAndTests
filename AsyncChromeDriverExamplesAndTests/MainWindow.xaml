@@ -42,10 +42,11 @@
                     <TextBlock HorizontalAlignment="Left" Margin="15,36,0,0" TextWrapping="Wrap" Text="X" VerticalAlignment="Top" Height="16" Width="7"/>
                     <TextBlock HorizontalAlignment="Left" Margin="77,36,0,0" TextWrapping="Wrap" Text="Y" VerticalAlignment="Top" Height="16" Width="7"/>
                     <Button Content="move to location in div" HorizontalAlignment="Left" Margin="221,36,0,0" VerticalAlignment="Top" Width="141" Height="20" Click="MouseTab_Button_Click_4"/>
-                    <Button Content="click" HorizontalAlignment="Left" Margin="375,36,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click"/>
+                    <Button Content="click div" HorizontalAlignment="Left" Margin="375,36,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click"/>
+                    <Button Content="click on page" HorizontalAlignment="Left" Margin="49,61,0,0" VerticalAlignment="Top" Width="109" Click="Button_Click_4"/>
                 </Grid>
             </TabItem>
-            <TabItem Header="Clicks" IsSelected="True">
+            <TabItem Header="Clicks" >
                 <Grid Background="#FFE5E5E5">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="29*"/>
@@ -67,6 +68,20 @@
                     </Grid.RowDefinitions>
                     <Button Content="listen events" HorizontalAlignment="Left" Margin="62,29,0,0" VerticalAlignment="Top" Width="97" Click="Button_Click_3"/>
                     <TextBox x:Name="tbPage" Grid.Row="1" TextWrapping="Wrap"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Settings" IsSelected="True">
+                <Grid Background="#FFE5E5E5">
+                    <TabControl>
+                        <TabItem Header="Permissions">
+                            <Grid Background="#FFE5E5E5">
+                                <Button Content="microphone" HorizontalAlignment="Left" Margin="35,10,0,0" VerticalAlignment="Top" Width="105" Click="Button_Click_5"/>
+                                <Button Content="add site" HorizontalAlignment="Left" Margin="167,37,0,0" VerticalAlignment="Top" Width="118" Click="Button_Click_6"/>
+                                <TextBox x:Name="tbSettingsSite" HorizontalAlignment="Left" Height="23" Margin="158,10,0,0" TextWrapping="Wrap" Text="https://www.google.com:443" VerticalAlignment="Top" Width="179"/>
+                                <CheckBox x:Name="chbIncognito" Content="incognito" HorizontalAlignment="Left" Margin="360,13,0,0" VerticalAlignment="Top"/>
+                            </Grid>
+                        </TabItem>
+                    </TabControl>
                 </Grid>
             </TabItem>
         </TabControl>
