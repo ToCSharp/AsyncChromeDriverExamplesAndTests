@@ -287,8 +287,8 @@ namespace AsyncChromeDriverExamplesAndTests
                 asyncChromeDriver = new AsyncChromeDriver();
                 webDriver = new WebDriver(asyncChromeDriver);
             }
-            await asyncChromeDriver.Navigation.GoToUrl("chrome://settings/content/microphone");
-            //await webDriver.GoToUrl("chrome://settings/content/microphone");
+            //await asyncChromeDriver.Navigation.GoToUrl("chrome://settings/content/microphone");
+            await webDriver.GoToUrl("chrome://settings/content/microphone");
             //await asyncChromeDriver.WebView.EvaluateScript("chrome.send('setCategoryPermissionForOrigin', ['https://www.google.com:443', '', 'media-stream-mic', 'allow', false])");
         }
 
@@ -301,7 +301,7 @@ namespace AsyncChromeDriverExamplesAndTests
 
         private async Task AddSiteMicPermission(string site, bool incognito)
         {
-            await asyncChromeDriver.WebView.EvaluateScript($"chrome.send('setCategoryPermissionForOrigin', ['{site}', '', 'media-stream-mic', 'allow', {incognito.ToString().ToLower()}])");
+            await webDriver.ExecuteScript($"chrome.send('setCategoryPermissionForOrigin', ['{site}', '', 'media-stream-mic', 'allow', {incognito.ToString().ToLower()}])");
         }
     }
 }
