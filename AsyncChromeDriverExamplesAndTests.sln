@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26730.10
+VisualStudioVersion = 15.0.26730.15
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AsyncChromeDriverExamplesAndTests", "AsyncChromeDriverExamplesAndTests\AsyncChromeDriverExamplesAndTests.csproj", "{9B39074F-38C4-40D2-99FA-494D421E2013}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AsyncWebDriver", "..\AsyncWebDriver\AsyncWebDriver\AsyncWebDriver.csproj", "{489FD59F-D739-4144-89B8-B5A719BCB120}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{9B39074F-38C4-40D2-99FA-494D421E2013}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9B39074F-38C4-40D2-99FA-494D421E2013}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9B39074F-38C4-40D2-99FA-494D421E2013}.Release|Any CPU.Build.0 = Release|Any CPU
+		{489FD59F-D739-4144-89B8-B5A719BCB120}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{489FD59F-D739-4144-89B8-B5A719BCB120}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{489FD59F-D739-4144-89B8-B5A719BCB120}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{489FD59F-D739-4144-89B8-B5A719BCB120}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
