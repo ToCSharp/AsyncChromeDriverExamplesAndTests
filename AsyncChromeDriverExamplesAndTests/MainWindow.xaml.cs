@@ -287,7 +287,8 @@ namespace AsyncChromeDriverExamplesAndTests
                 asyncChromeDriver = new AsyncChromeDriver();
                 webDriver = new WebDriver(asyncChromeDriver);
             }
-            await asyncChromeDriver.GoToUrl("chrome://settings/content/microphone");
+            await asyncChromeDriver.Navigation.GoToUrl("chrome://settings/content/microphone");
+            //await webDriver.GoToUrl("chrome://settings/content/microphone");
             //await asyncChromeDriver.WebView.EvaluateScript("chrome.send('setCategoryPermissionForOrigin', ['https://www.google.com:443', '', 'media-stream-mic', 'allow', false])");
         }
 
