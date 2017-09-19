@@ -7,6 +7,18 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AsyncChromeDriverExamplesAn
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AsyncWebDriver", "..\AsyncWebDriver\AsyncWebDriver\AsyncWebDriver.csproj", "{489FD59F-D739-4144-89B8-B5A719BCB120}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AsyncChromeDriver", "..\AsyncChromeDriver\AsyncChromeDriver\AsyncChromeDriver.csproj", "{B397FF4B-9290-478F-BB70-DA91D23E4B68}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BaristaLabs.ChromeDevTools.Runtime.NetFramework", "..\AsyncChromeDriver\BaristaLabs.chrome-dev-tools-runtime\BaristaLabs.ChromeDevTools.Runtime.NetFramework\BaristaLabs.ChromeDevTools.Runtime.NetFramework.csproj", "{6F8EB349-FD03-41A7-9434-117CE10C999E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AsyncWebDriver.SeleniumAdapter", "AsyncWebDriver.SeleniumAdapter\AsyncWebDriver.SeleniumAdapter.csproj", "{8BA175B3-1186-4B8E-B25E-3402E883C1AB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AsyncWebDriver.SeleniumAdapter.Common.Tests", "AsyncWebDriver.SeleniumAdapter.Common.Tests\AsyncWebDriver.SeleniumAdapter.Common.Tests.csproj", "{D80F785B-F9E7-457D-B814-B4CC62EEE5AB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HtmlForTests", "HtmlForTests\HtmlForTests.csproj", "{2FB6308D-F2D2-4D8C-ACB3-CDE08291E378}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleHTTPServer", "SimpleHTTPServer\SimpleHTTPServer.csproj", "{1F150971-6DD8-42FA-AF03-36D68AD40A8D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +33,30 @@ Global
 		{489FD59F-D739-4144-89B8-B5A719BCB120}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{489FD59F-D739-4144-89B8-B5A719BCB120}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{489FD59F-D739-4144-89B8-B5A719BCB120}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B397FF4B-9290-478F-BB70-DA91D23E4B68}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B397FF4B-9290-478F-BB70-DA91D23E4B68}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B397FF4B-9290-478F-BB70-DA91D23E4B68}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B397FF4B-9290-478F-BB70-DA91D23E4B68}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6F8EB349-FD03-41A7-9434-117CE10C999E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6F8EB349-FD03-41A7-9434-117CE10C999E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6F8EB349-FD03-41A7-9434-117CE10C999E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6F8EB349-FD03-41A7-9434-117CE10C999E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8BA175B3-1186-4B8E-B25E-3402E883C1AB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8BA175B3-1186-4B8E-B25E-3402E883C1AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8BA175B3-1186-4B8E-B25E-3402E883C1AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8BA175B3-1186-4B8E-B25E-3402E883C1AB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D80F785B-F9E7-457D-B814-B4CC62EEE5AB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D80F785B-F9E7-457D-B814-B4CC62EEE5AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D80F785B-F9E7-457D-B814-B4CC62EEE5AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D80F785B-F9E7-457D-B814-B4CC62EEE5AB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2FB6308D-F2D2-4D8C-ACB3-CDE08291E378}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2FB6308D-F2D2-4D8C-ACB3-CDE08291E378}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2FB6308D-F2D2-4D8C-ACB3-CDE08291E378}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2FB6308D-F2D2-4D8C-ACB3-CDE08291E378}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1F150971-6DD8-42FA-AF03-36D68AD40A8D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1F150971-6DD8-42FA-AF03-36D68AD40A8D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1F150971-6DD8-42FA-AF03-36D68AD40A8D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1F150971-6DD8-42FA-AF03-36D68AD40A8D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
