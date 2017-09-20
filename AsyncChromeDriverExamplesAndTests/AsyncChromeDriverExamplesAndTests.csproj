@@ -110,6 +110,8 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="data\screenshot3.png" />
+    <Resource Include="data\screenshot4.png" />
     <Content Include="html\js\jquery-1.4.4.min.js">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

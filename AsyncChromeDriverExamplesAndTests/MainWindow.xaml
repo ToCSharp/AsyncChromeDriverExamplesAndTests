@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AsyncChromeDriverExamplesAndTests"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525" Closing="Window_Closing">
+        Title="MainWindow" Height="358.924" Width="587.466" Closing="Window_Closing">
     <Grid>
         <TabControl>
             <TabItem Header="Open">
@@ -77,10 +77,16 @@
                     <TabControl>
                         <TabItem Header="Permissions">
                             <Grid Background="#FFE5E5E5">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="84"/>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
                                 <Button Content="microphone" HorizontalAlignment="Left" Margin="35,10,0,0" VerticalAlignment="Top" Width="105" Click="Button_Click_5"/>
                                 <Button Content="add site" HorizontalAlignment="Left" Margin="167,37,0,0" VerticalAlignment="Top" Width="118" Click="Button_Click_6"/>
                                 <TextBox x:Name="tbSettingsSite" HorizontalAlignment="Left" Height="23" Margin="158,10,0,0" TextWrapping="Wrap" Text="https://www.google.com:443" VerticalAlignment="Top" Width="179"/>
                                 <CheckBox x:Name="chbIncognito" Content="incognito" HorizontalAlignment="Left" Margin="360,13,0,0" VerticalAlignment="Top"/>
+                                <Button Content="Button" HorizontalAlignment="Left" Margin="370,46,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click_12"/>
+                                <TextBox x:Name="tbPermissionsRes" Grid.Row="1" TextWrapping="Wrap"/>
                             </Grid>
                         </TabItem>
                     </TabControl>
@@ -107,8 +113,21 @@
                         <RowDefinition/>
                     </Grid.RowDefinitions>
                     <Button Content="listen Console" HorizontalAlignment="Left" Margin="38,18,0,0" VerticalAlignment="Top" Width="123" Click="Button_Click_8"/>
-                    <TextBox x:Name="tbConsoleMessages" Grid.Row="1" TextWrapping="Wrap" Text="TextBox"/>
+                    <TextBox x:Name="tbConsoleMessages" Grid.Row="1" TextWrapping="Wrap"/>
                     <Button Content="console.log('test1')" HorizontalAlignment="Left" Margin="224,18,0,0" VerticalAlignment="Top" Width="158" Click="Button_Click_9"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="DOMDebugger">
+                <Grid Background="#FFE5E5E5">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="77"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <TextBox x:Name="tbDOMDebuggerMessages" Grid.Row="1" TextWrapping="Wrap"/>
+                    <TextBox x:Name="tbDOMDebuggerNodeId" HorizontalAlignment="Left" Height="23" Margin="109,10,0,0" TextWrapping="Wrap" Text="lst-ib" VerticalAlignment="Top" Width="153"/>
+                    <TextBlock HorizontalAlignment="Left" Margin="46,11,0,0" TextWrapping="Wrap" Text="element id" VerticalAlignment="Top"/>
+                    <Button Content="Listen subtree modification" HorizontalAlignment="Left" Margin="22,38,0,0" VerticalAlignment="Top" Width="175" Click="Button_Click_10"/>
+                    <Button Content="Listen attribute modification" HorizontalAlignment="Left" Margin="218,38,0,0" VerticalAlignment="Top" Width="172" Click="Button_Click_11"/>
                 </Grid>
             </TabItem>
         </TabControl>

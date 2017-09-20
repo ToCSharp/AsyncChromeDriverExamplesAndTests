@@ -15,6 +15,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Threading;
 using BaristaLabs.ChromeDevTools.Runtime.Console;
+using BaristaLabs.ChromeDevTools.Runtime.Debugger;
 using Zu.AsyncWebDriver.Remote;
 using Zu.Chrome;
 using Zu.WebBrowser.BasicTypes;
@@ -376,6 +377,135 @@ namespace AsyncChromeDriverExamplesAndTests
         {
             if (webDriver == null) return;
             await webDriver.GoToUrl("data:text/html,%3Cscript%3Econsole.log%28%27test1%27%29%3B%3C%2Fscript%3E");
+        }
+
+        bool listeningDebugger = false;
+        private async void Button_Click_10(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                if (webDriver == null) return;
+                var nodeDomId = tbDOMDebuggerNodeId.Text;
+                //var el = await webDriver.FindElementById(nodeDomId);
+
+                //if (el == null)
+                //{
+                //    tbDOMDebuggerMessages.Text = $"No element with id '{nodeDomId}'";
+                //    return;
+                //}
+                //var nodeId1 = await asyncChromeDriver.DevTools.Session.DOM.RequestNode(new BaristaLabs.ChromeDevTools.Runtime.DOM.RequestNodeCommand
+                //{
+                //    ObjectId = nodeDomId
+                //});
+                var doc = await asyncChromeDriver.DevTools.Session.DOM.GetDocument(new BaristaLabs.ChromeDevTools.Runtime.DOM.GetDocumentCommand
+                {
+                    Depth = -1,
+                  //  Pierce = true
+                });
+                //var docFlattened = await asyncChromeDriver.DevTools.Session.DOM.GetFlattenedDocument(new BaristaLabs.ChromeDevTools.Runtime.DOM.GetFlattenedDocumentCommand
+                //{
+                //    Depth = -1,
+                // //   Pierce = true
+                //});
+
+                var objId = await asyncChromeDriver.DevTools.Session.DOM.ResolveNode(new BaristaLabs.ChromeDevTools.Runtime.DOM.ResolveNodeCommand
+                {
+                    NodeId = doc.Root.NodeId
+                });
+                var nodeId1 = await asyncChromeDriver.DevTools.Session.DOM.RequestNode(new BaristaLabs.ChromeDevTools.Runtime.DOM.RequestNodeCommand
+                {
+                    ObjectId = objId.Object.ObjectId
+                });
+
+                var nodeId = await asyncChromeDriver.DevTools.Session.DOM.QuerySelector(new BaristaLabs.ChromeDevTools.Runtime.DOM.QuerySelectorCommand
+                {
+                    NodeId = doc.Root.NodeId,
+                    Selector = "#" + nodeDomId
+                });
+
+                var outerHTML = await asyncChromeDriver.DevTools.Session.DOM.GetOuterHTML(new BaristaLabs.ChromeDevTools.Runtime.DOM.GetOuterHTMLCommand
+                {
+                    NodeId = nodeId.NodeId
+                });
+
+                if (!listeningDebugger)
+                {
+                    listeningDebugger = true;
+                    asyncChromeDriver.DevTools.Session.Debugger.SubscribeToBreakpointResolvedEvent(OnBreakpointResolvedEvent);
+                    asyncChromeDriver.DevTools.Session.Debugger.SubscribeToPausedEvent(OnPausedEvent);
+                    await asyncChromeDriver.DevTools.Session.Debugger.Enable();
+                }
+                var res = await asyncChromeDriver.DevTools.Session.DOMDebugger.SetDOMBreakpoint(new BaristaLabs.ChromeDevTools.Runtime.DOMDebugger.SetDOMBreakpointCommand
+                {
+                    Type = BaristaLabs.ChromeDevTools.Runtime.DOMDebugger.DOMBreakpointType.SubtreeModified,
+                    NodeId = nodeId.NodeId
+                });
+            }
+            catch(Exception ex)
+            {
+                tbDOMDebuggerMessages.Text = ex.ToString();
+            }
+        }
+
+        private async void OnPausedEvent(PausedEvent obj)
+        {
+            var mess = $"{obj.Reason}: {obj.Data.ToString()}";
+            Dispatcher.Invoke(DispatcherPriority.Normal, (ThreadStart)delegate ()
+            {
+                tbDOMDebuggerMessages.Text = $"{mess} {Environment.NewLine}" + tbDOMDebuggerMessages.Text;
+            });
+            await asyncChromeDriver.DevTools.Session.Debugger.Resume();
+        }
+
+        private void OnBreakpointResolvedEvent(BreakpointResolvedEvent obj)
+        {
+
+        }
+
+        private async void Button_Click_11(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                if (webDriver == null) return;
+                var nodeDomId = tbDOMDebuggerNodeId.Text;
+                var doc = await asyncChromeDriver.DevTools.Session.DOM.GetDocument(new BaristaLabs.ChromeDevTools.Runtime.DOM.GetDocumentCommand
+                {
+                    Depth = -1,
+                    //  Pierce = true
+                });
+
+                var objId = await asyncChromeDriver.DevTools.Session.DOM.ResolveNode(new BaristaLabs.ChromeDevTools.Runtime.DOM.ResolveNodeCommand
+                {
+                    NodeId = doc.Root.NodeId
+                });
+                var nodeId = await asyncChromeDriver.DevTools.Session.DOM.QuerySelector(new BaristaLabs.ChromeDevTools.Runtime.DOM.QuerySelectorCommand
+                {
+                    NodeId = doc.Root.NodeId,
+                    Selector = "#" + nodeDomId
+                });
+
+                if (!listeningDebugger)
+                {
+                    listeningDebugger = true;
+                    asyncChromeDriver.DevTools.Session.Debugger.SubscribeToBreakpointResolvedEvent(OnBreakpointResolvedEvent);
+                    asyncChromeDriver.DevTools.Session.Debugger.SubscribeToPausedEvent(OnPausedEvent);
+                    await asyncChromeDriver.DevTools.Session.Debugger.Enable();
+                }
+                var res = await asyncChromeDriver.DevTools.Session.DOMDebugger.SetDOMBreakpoint(new BaristaLabs.ChromeDevTools.Runtime.DOMDebugger.SetDOMBreakpointCommand
+                {
+                    Type = BaristaLabs.ChromeDevTools.Runtime.DOMDebugger.DOMBreakpointType.AttributeModified,
+                    NodeId = nodeId.NodeId
+                });
+            }
+            catch (Exception ex)
+            {
+                tbDOMDebuggerMessages.Text = ex.ToString();
+            }
+        }
+
+        private void Button_Click_12(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
