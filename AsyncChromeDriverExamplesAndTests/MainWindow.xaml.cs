@@ -367,9 +367,15 @@ namespace AsyncChromeDriverExamplesAndTests
         {
             Dispatcher.BeginInvoke(DispatcherPriority.Normal, (ThreadStart)delegate ()
             {
-                tbConsoleMessages.Text = $"{mess.Message.Level}: {mess.Message.Text} {Environment.NewLine}" + tbPage.Text;
+                tbConsoleMessages.Text = $"{mess.Message.Level}: {mess.Message.Text} {Environment.NewLine}" + tbConsoleMessages.Text;
             });
 
+        }
+
+        private async void Button_Click_9(object sender, RoutedEventArgs e)
+        {
+            if (webDriver == null) return;
+            await webDriver.GoToUrl("data:text/html,%3Cscript%3Econsole.log%28%27test1%27%29%3B%3C%2Fscript%3E");
         }
     }
 }

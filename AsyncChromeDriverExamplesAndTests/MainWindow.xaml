@@ -108,6 +108,7 @@
                     </Grid.RowDefinitions>
                     <Button Content="listen Console" HorizontalAlignment="Left" Margin="38,18,0,0" VerticalAlignment="Top" Width="123" Click="Button_Click_8"/>
                     <TextBox x:Name="tbConsoleMessages" Grid.Row="1" TextWrapping="Wrap" Text="TextBox"/>
+                    <Button Content="console.log('test1')" HorizontalAlignment="Left" Margin="224,18,0,0" VerticalAlignment="Top" Width="158" Click="Button_Click_9"/>
                 </Grid>
             </TabItem>
         </TabControl>
