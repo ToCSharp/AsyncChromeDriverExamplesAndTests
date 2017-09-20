@@ -14,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Threading;
+using BaristaLabs.ChromeDevTools.Runtime.Console;
 using Zu.AsyncWebDriver.Remote;
 using Zu.Chrome;
 using Zu.WebBrowser.BasicTypes;
@@ -47,15 +48,18 @@ namespace AsyncChromeDriverExamplesAndTests
         {
             try
             {
+                var addArgs = tbOpenAddArgs.Text;
                 if (chbOpenProfileHeadless.IsChecked == true)
                 {
                     var width = 1200;
                     var height = 900;
                     int.TryParse(tbOpenProfileHeadlessWidth.Text, out width);
                     int.TryParse(tbOpenProfileHeadlessHeight.Text, out height);
-                    asyncChromeDriver = new AsyncChromeDriver(new ChromeDriverConfig().SetHeadless().SetWindowSize(width, height).SetIsTempProfile());
+                    var config = new ChromeDriverConfig().SetHeadless().SetWindowSize(width, height).SetIsTempProfile();
+                    if (!string.IsNullOrWhiteSpace(addArgs)) config.SetCommandLineArgumets(addArgs);
+                    asyncChromeDriver = new AsyncChromeDriver(config);
                 }
-                else asyncChromeDriver = new AsyncChromeDriver();
+                else asyncChromeDriver = string.IsNullOrWhiteSpace(addArgs) ? new AsyncChromeDriver() : new AsyncChromeDriver(new ChromeDriverConfig().SetCommandLineArgumets(addArgs));
                 webDriver = new WebDriver(asyncChromeDriver);
                 await asyncChromeDriver.Connect();
                 tbDevToolsRes2.Text = $"opened on port {asyncChromeDriver.Port} in dir {asyncChromeDriver.UserDir} \nWhen close, dir will be DELETED";
@@ -78,6 +82,7 @@ namespace AsyncChromeDriverExamplesAndTests
         private async void OpenTab_Button_Click_9(object sender, RoutedEventArgs e)
         {
             var userDir = tbOpenProfileDir.Text;
+            var addArgs = tbOpenAddArgs.Text;
             try
             {
                 if (chbOpenProfileHeadless.IsChecked == true)
@@ -86,9 +91,12 @@ namespace AsyncChromeDriverExamplesAndTests
                     var height = 900;
                     int.TryParse(tbOpenProfileHeadlessWidth.Text, out width);
                     int.TryParse(tbOpenProfileHeadlessHeight.Text, out height);
-                    asyncChromeDriver = new AsyncChromeDriver(new ChromeDriverConfig().SetHeadless().SetWindowSize(width, height).SetUserDir(userDir));
+                    var config = new ChromeDriverConfig().SetHeadless().SetWindowSize(width, height).SetUserDir(userDir);
+                    if (!string.IsNullOrWhiteSpace(addArgs)) config.SetCommandLineArgumets(addArgs);
+                    asyncChromeDriver = new AsyncChromeDriver(config);
                 }
-                else asyncChromeDriver = new AsyncChromeDriver(userDir);
+                else asyncChromeDriver = string.IsNullOrWhiteSpace(addArgs) ? new AsyncChromeDriver(userDir) : new AsyncChromeDriver(new ChromeDriverConfig().SetUserDir(userDir).SetCommandLineArgumets(addArgs));
+                //else asyncChromeDriver = new AsyncChromeDriver(userDir);
                 webDriver = new WebDriver(asyncChromeDriver);
                 // await asyncChromeDriver.Connect(); // browser opens here
                 await webDriver.GoToUrl("https://www.google.com/"); // browser opens here
@@ -105,6 +113,7 @@ namespace AsyncChromeDriverExamplesAndTests
         private async void OpenTab_Button_Click_10(object sender, RoutedEventArgs e)
         {
             var userDir = tbOpenProfileDir.Text;
+            var addArgs = tbOpenAddArgs.Text;
             if (int.TryParse(tbOpenProfilePort.Text, out int port))
             {
                 try
@@ -115,9 +124,13 @@ namespace AsyncChromeDriverExamplesAndTests
                         var height = 900;
                         int.TryParse(tbOpenProfileHeadlessWidth.Text, out width);
                         int.TryParse(tbOpenProfileHeadlessHeight.Text, out height);
-                        asyncChromeDriver = new AsyncChromeDriver(new ChromeDriverConfig().SetHeadless().SetWindowSize(width, height).SetUserDir(userDir).SetPort(port));
+                        var config = new ChromeDriverConfig().SetHeadless().SetWindowSize(width, height).SetUserDir(userDir).SetPort(port);
+                        if (!string.IsNullOrWhiteSpace(addArgs)) config.SetCommandLineArgumets(addArgs);
+                        asyncChromeDriver = new AsyncChromeDriver(config);
                     }
-                    else asyncChromeDriver = new AsyncChromeDriver(userDir, port);
+                    else asyncChromeDriver = string.IsNullOrWhiteSpace(addArgs) ?
+                            new AsyncChromeDriver(userDir, port) :
+                            new AsyncChromeDriver(new ChromeDriverConfig().SetUserDir(userDir).SetPort(port).SetCommandLineArgumets(addArgs));
                     webDriver = new WebDriver(asyncChromeDriver);
                     // await asyncChromeDriver.Connect(); // browser opens here
                     await webDriver.GoToUrl("https://www.google.com/"); // browser opens here
@@ -135,15 +148,18 @@ namespace AsyncChromeDriverExamplesAndTests
         {
             try
             {
+                var addArgs = tbOpenAddArgs.Text;
                 if (chbOpenProfileHeadless.IsChecked == true)
                 {
                     var width = 1200;
                     var height = 900;
                     int.TryParse(tbOpenProfileHeadlessWidth.Text, out width);
                     int.TryParse(tbOpenProfileHeadlessHeight.Text, out height);
-                    asyncChromeDriver = new AsyncChromeDriver(new ChromeDriverConfig().SetHeadless().SetWindowSize(width, height));
+                    var config = new ChromeDriverConfig().SetHeadless().SetWindowSize(width, height);
+                    if (!string.IsNullOrWhiteSpace(addArgs)) config.SetCommandLineArgumets(addArgs);
+                    asyncChromeDriver = new AsyncChromeDriver(config);
                 }
-                else asyncChromeDriver = new AsyncChromeDriver(new ChromeDriverConfig());
+                else asyncChromeDriver = string.IsNullOrWhiteSpace(addArgs) ? new AsyncChromeDriver(new ChromeDriverConfig()) : new AsyncChromeDriver(new ChromeDriverConfig().SetCommandLineArgumets(addArgs));
                 webDriver = new WebDriver(asyncChromeDriver);
                 await asyncChromeDriver.Connect(); // browser opens here
                                                    // await webDriver.GoToUrl("https://www.google.com/"); // browser opens here
@@ -301,7 +317,59 @@ namespace AsyncChromeDriverExamplesAndTests
 
         private async Task AddSiteMicPermission(string site, bool incognito)
         {
-            await webDriver.ExecuteScript($"chrome.send('setCategoryPermissionForOrigin', ['{site}', '', 'media-stream-mic', 'allow', {incognito.ToString().ToLower()}])");
+            var res = await webDriver.ExecuteScript($"chrome.send('setCategoryPermissionForOrigin', ['{site}', '', 'media-stream-mic', 'allow', {incognito.ToString().ToLower()}])");
+        }
+
+        private async void Button_Click_7(object sender, RoutedEventArgs e)
+        {
+            if (webDriver != null)
+            {
+                var dir = tbScreenshotDir.Text;
+                var screenshot = await webDriver.GetScreenshot();
+                //screenshot.SaveAsFile(GetFilePathToSaveScreenshot(), Zu.WebBrowser.BasicTypes.ScreenshotImageFormat.Png);
+                using (MemoryStream imageStream = new MemoryStream(screenshot.AsByteArray))
+                {
+                    System.Drawing.Image screenshotImage = System.Drawing.Image.FromStream(imageStream);
+                    screenshotImage.Save(GetFilePathToSaveScreenshot(dir), System.Drawing.Imaging.ImageFormat.Png);
+                }
+
+            }
+        }
+
+        private static string GetFilePathToSaveScreenshot(string dir = null)
+        {
+            dir = dir ?? @"C:\temp";
+            if (!Directory.Exists(dir)) Directory.CreateDirectory(dir);
+            var i = 0;
+            var path = "";
+            do
+            {
+                i++;
+                path = Path.Combine(dir, $"screenshot{i}.png");
+            } while (File.Exists(path));
+            return path;
+        }
+
+        private async void Button_Click_8(object sender, RoutedEventArgs e)
+        {
+            if (webDriver == null)
+            {
+                asyncChromeDriver = new AsyncChromeDriver();
+                webDriver = new WebDriver(asyncChromeDriver);
+            }
+            await asyncChromeDriver.CheckConnected();
+            asyncChromeDriver.DevTools.Session.Console.SubscribeToMessageAddedEvent(OnConsoleMessage);
+            await asyncChromeDriver.DevTools.Session.Console.Enable();
+
+        }
+
+        private void OnConsoleMessage(MessageAddedEvent mess)
+        {
+            Dispatcher.BeginInvoke(DispatcherPriority.Normal, (ThreadStart)delegate ()
+            {
+                tbConsoleMessages.Text = $"{mess.Message.Level}: {mess.Message.Text} {Environment.NewLine}" + tbPage.Text;
+            });
+
         }
     }
 }
