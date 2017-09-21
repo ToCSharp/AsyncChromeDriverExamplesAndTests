@@ -3,12 +3,12 @@ using Zu.AsyncWebDriver.Remote;
 
 namespace AsyncWebDriver.SeleniumAdapter.Chrome
 {
-    internal class TargetLocator : ITargetLocator
+    public class TargetLocatorAdapter : ITargetLocator
     {
         private SyncRemoteTargetLocator syncRemoteTargetLocator;
-        private WebDriver webDriver;
+        private WebDriverAdapter webDriver;
 
-        public TargetLocator(SyncRemoteTargetLocator syncRemoteTargetLocator, WebDriver webDriver)
+        public TargetLocatorAdapter(SyncRemoteTargetLocator syncRemoteTargetLocator, WebDriverAdapter webDriver)
         {
             this.syncRemoteTargetLocator = syncRemoteTargetLocator;
             this.webDriver = webDriver;
@@ -16,7 +16,7 @@ namespace AsyncWebDriver.SeleniumAdapter.Chrome
 
         public IWebElement ActiveElement()
         {
-            return new WebElement(syncRemoteTargetLocator.ActiveElement());
+            return new WebElementAdapter(syncRemoteTargetLocator.ActiveElement());
         }
 
         public IAlert Alert()

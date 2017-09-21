@@ -51,14 +51,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Chrome\Alert.cs" />
+    <Compile Include="Chrome\CoordinatesAdapter.cs" />
     <Compile Include="Chrome\KeyboardAdapter.cs" />
     <Compile Include="Chrome\MouseAdapter.cs" />
-    <Compile Include="Chrome\Navigate.cs" />
-    <Compile Include="Chrome\TargetLocator.cs" />
+    <Compile Include="Chrome\NavigateAdapter.cs" />
+    <Compile Include="Chrome\TargetLocatorAdapter.cs" />
+    <Compile Include="Chrome\WebDriverAdapter.cs" />
     <Compile Include="Chrome\WebDriverConverters.cs" />
-    <Compile Include="Chrome\WebDriverOptions.cs" />
-    <Compile Include="Chrome\WebDriverTimeouts.cs" />
-    <Compile Include="Chrome\WebElement.cs" />
+    <Compile Include="Chrome\WebDriverOptionsAdapter.cs" />
+    <Compile Include="Chrome\WebDriverTimeoutsAdapter.cs" />
+    <Compile Include="Chrome\WebElementAdapter.cs" />
     <Compile Include="Selenium\By.cs" />
     <Compile Include="Selenium\Cookie.cs" />
     <Compile Include="Selenium\ElementNotVisibleException.cs" />
@@ -155,7 +157,6 @@
     <Compile Include="Selenium\LogEntry.cs" />
     <Compile Include="Selenium\LogLevel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Chrome\WebDriver.cs" />
     <Compile Include="Selenium\NoAlertPresentException.cs" />
     <Compile Include="Selenium\NoSuchElementException.cs" />
     <Compile Include="Selenium\NoSuchFrameException.cs" />

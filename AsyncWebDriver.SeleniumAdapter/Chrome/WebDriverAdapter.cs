@@ -2,8 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Collections.ObjectModel;
 using System.Threading;
 using OpenQA.Selenium.Internal;
@@ -12,20 +10,20 @@ using OpenQA.Selenium.Interactions;
 
 namespace AsyncWebDriver.SeleniumAdapter.Chrome
 {
-    public class WebDriver : IWebDriver, ISearchContext, IJavaScriptExecutor, IFindsById, IFindsByClassName, IFindsByLinkText, IFindsByName, IFindsByTagName, IFindsByXPath, IFindsByPartialLinkText, IFindsByCssSelector, ITakesScreenshot, IHasInputDevices,/* IHasCapabilities, */IHasWebStorage, IHasLocationContext, IHasApplicationCache, /*IAllowsFileDetection, IHasSessionId, */IActionExecutor
+    public class WebDriverAdapter : IWebDriver, ISearchContext, IJavaScriptExecutor, IFindsById, IFindsByClassName, IFindsByLinkText, IFindsByName, IFindsByTagName, IFindsByXPath, IFindsByPartialLinkText, IFindsByCssSelector, ITakesScreenshot, IHasInputDevices,/* IHasCapabilities, */IHasWebStorage, IHasLocationContext, IHasApplicationCache, /*IAllowsFileDetection, IHasSessionId, */IActionExecutor
     {
         private Zu.Chrome.AsyncChromeDriver asyncChromeDriver;
         private Zu.AsyncWebDriver.Remote.WebDriver asyncWebDriver;
         private Zu.AsyncWebDriver.Remote.SyncWebDriver syncWebDriver;
 
-        public WebDriver()
+        public WebDriverAdapter()
         {
             asyncChromeDriver = new Zu.Chrome.AsyncChromeDriver();
             asyncChromeDriver.Session.ImplicitWait = TimeSpan.FromMilliseconds(500);
             asyncWebDriver = new Zu.AsyncWebDriver.Remote.WebDriver(asyncChromeDriver);
             syncWebDriver = new Zu.AsyncWebDriver.Remote.SyncWebDriver(asyncWebDriver);
         }
-        public string Url { get => syncWebDriver.Url; set => syncWebDriver.GoToUrl(value); }
+        public string Url { get => syncWebDriver.Url; set => Navigate().GoToUrl(value); }
 
         public string Title => syncWebDriver.Title();
 
@@ -51,7 +49,7 @@ namespace AsyncWebDriver.SeleniumAdapter.Chrome
 
         public IApplicationCache ApplicationCache => throw new NotImplementedException();
 
-        public bool IsActionExecutor => throw new NotImplementedException();
+        public bool IsActionExecutor => true;
 
         public void Close()
         {
@@ -85,7 +83,7 @@ namespace AsyncWebDriver.SeleniumAdapter.Chrome
                     el = syncWebDriver.FindElement(WebDriverConverters.By(by));
                 }
             }
-            return new WebElement(el);
+            return new WebElementAdapter(el);
         }
 
         public IWebElement FindElementByClassName(string className)
@@ -130,14 +128,14 @@ namespace AsyncWebDriver.SeleniumAdapter.Chrome
 
         public ReadOnlyCollection<IWebElement> FindElements(By by)
         {
-            var els = syncWebDriver.FindElements(WebDriverConverters.By(by)).Select(v => (IWebElement)new WebElement(v)).ToList();
+            var els = syncWebDriver.FindElements(WebDriverConverters.By(by)).Select(v => (IWebElement)new WebElementAdapter(v)).ToList();
             if (els == null && asyncChromeDriver.Session.ImplicitWait != default(TimeSpan))
             {
                 var waitEnd = DateTime.Now + asyncChromeDriver.Session.ImplicitWait;
                 while (els == null && DateTime.Now < waitEnd)
                 {
                     Thread.Sleep(50);
-                    els = syncWebDriver.FindElements(WebDriverConverters.By(by)).Select(v => (IWebElement)new WebElement(v)).ToList();
+                    els = syncWebDriver.FindElements(WebDriverConverters.By(by)).Select(v => (IWebElement)new WebElementAdapter(v)).ToList();
                 }
             }
             return new ReadOnlyCollection<IWebElement>(els);
@@ -170,7 +168,7 @@ namespace AsyncWebDriver.SeleniumAdapter.Chrome
 
         public ReadOnlyCollection<IWebElement> FindElementsByPartialLinkText(string partialLinkText)
         {
-            return FindElements(By. PartialLinkText(partialLinkText));
+            return FindElements(By.PartialLinkText(partialLinkText));
         }
 
         public ReadOnlyCollection<IWebElement> FindElementsByTagName(string tagName)
@@ -185,22 +183,22 @@ namespace AsyncWebDriver.SeleniumAdapter.Chrome
 
         public Screenshot GetScreenshot()
         {
-            throw new NotImplementedException();
+            return WebDriverConverters.SeleniumScreenshot(syncWebDriver.GetScreenshot());
         }
 
         public IOptions Manage()
         {
-            return new WebDriverOptions(syncWebDriver.Manage());
+            return new WebDriverOptionsAdapter(syncWebDriver.Manage());
         }
 
         public INavigation Navigate()
         {
-            return new Navigate(syncWebDriver.Navigate());
+            return new NavigateAdapter(syncWebDriver.Navigate());
         }
 
         public void PerformActions(IList<ActionSequence> actionSequenceList)
         {
-            throw new NotImplementedException();
+            syncWebDriver.PerformActions(WebDriverConverters.SeleniumActionSequenceList(actionSequenceList));
         }
 
         public void Quit()
@@ -210,12 +208,12 @@ namespace AsyncWebDriver.SeleniumAdapter.Chrome
 
         public void ResetInputState()
         {
-            //throw new NotImplementedException();
+            syncWebDriver.ResetInputState();
         }
 
         public ITargetLocator SwitchTo()
         {
-            return new TargetLocator(syncWebDriver.SwitchTo(), this);
+            return new TargetLocatorAdapter(syncWebDriver.SwitchTo(), this);
         }
     }
 }

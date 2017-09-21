@@ -5,11 +5,11 @@ using Zu.WebBrowser.AsyncInteractions;
 
 namespace AsyncWebDriver.SeleniumAdapter.Chrome
 {
-    internal class Navigate : OpenQA.Selenium.INavigation
+    internal class NavigateAdapter : OpenQA.Selenium.INavigation
     {
         private SyncNavigation syncNavigation;
 
-        public Navigate(SyncNavigation syncNavigation)
+        public NavigateAdapter(SyncNavigation syncNavigation)
         {
             this.syncNavigation = syncNavigation;
         }

@@ -1,6 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Drawing;
 using OpenQA.Selenium;
+using OpenQA.Selenium.Interactions;
 using Zu.AsyncWebDriver;
+using Zu.WebBrowser.BasicTypes;
 
 namespace AsyncWebDriver.SeleniumAdapter.Chrome
 {
@@ -18,6 +22,21 @@ namespace AsyncWebDriver.SeleniumAdapter.Chrome
             if (description.StartsWith("By.TagName: ")) return Zu.AsyncWebDriver.By.TagName(description.Substring("By.TagName: ".Length));
             if (description.StartsWith("By.CssSelector: ")) return Zu.AsyncWebDriver.By.CssSelector(description.Substring("By.CssSelector: ".Length));
             throw new NotSupportedException(description);
+        }
+
+        internal static OpenQA.Selenium.Screenshot SeleniumScreenshot(Zu.WebBrowser.BasicTypes.Screenshot screenshot)
+        {
+            return new OpenQA.Selenium.Screenshot(screenshot.AsBase64EncodedString) ;
+        }
+
+        internal static Point ToDrawingPoint(WebPoint webPoint)
+        {
+            return new Point(webPoint.X, webPoint.Y);
+        }
+
+        internal static IList<Zu.WebBrowser.BasicTypes.ActionSequence> SeleniumActionSequenceList(IList<OpenQA.Selenium.Interactions.ActionSequence> actionSequenceList)
+        {
+            throw new NotImplementedException();
         }
     }
 }
