@@ -7,6 +7,7 @@ using System.Threading;
 using OpenQA.Selenium.Internal;
 using OpenQA.Selenium.Html5;
 using OpenQA.Selenium.Interactions;
+using System.Collections;
 
 namespace AsyncWebDriver.SeleniumAdapter.Chrome
 {
@@ -63,13 +64,86 @@ namespace AsyncWebDriver.SeleniumAdapter.Chrome
 
         public object ExecuteAsyncScript(string script, params object[] args)
         {
-            return syncWebDriver.ExecuteAsyncScript(script, args);
+            var res = syncWebDriver.ExecuteAsyncScript(script, ReplaceWebElementsInArgs(args));
+            res = ReplaceWebElements(res);
+            return res;
         }
 
         public object ExecuteScript(string script, params object[] args)
         {
-            return syncWebDriver.ExecuteScript(script, args);
+            var res = syncWebDriver.ExecuteScript(script, ReplaceWebElementsInArgs(args));
+            res = ReplaceWebElements(res);
+            return res;
         }
+
+        private object ReplaceWebElements(object obj)
+        {
+            if (obj is string || obj is float || obj is double || obj is int || obj is long || obj is bool || obj == null) return obj;
+            if (obj is Zu.AsyncWebDriver.Remote.SyncWebElement) return new WebElementAdapter(obj as Zu.AsyncWebDriver.Remote.SyncWebElement);
+            var col = obj as IEnumerable;
+            var dic = obj as IDictionary;
+            if (dic != null)
+            {
+                var resDic = new Dictionary<string, object>();
+                foreach (DictionaryEntry item in dic)
+                {
+                    resDic.Add(item.Key.ToString(), ReplaceWebElements(item.Value));
+                }
+                return resDic;
+            }
+            else if (col != null)
+            {
+                var list = new List<object>();
+                foreach (var item in col)
+                {
+                    list.Add(ReplaceWebElements(item));
+                }
+                if (list.All(v => v is WebElementAdapter)) return new ReadOnlyCollection<IWebElement>(list.Cast<IWebElement>().ToList());
+                return new ReadOnlyCollection<object>(list);
+            }
+            else return obj;
+        }
+
+        private object[] ReplaceWebElementsInArgs(object[] args)
+        {
+            if (args == null) return new object[] { null };
+            var list = new List<object>();
+            foreach (var item in args)
+            {
+                list.Add(ReplaceWebElementsInArg(item));
+            }
+            return list.ToArray();
+        }
+
+        private object ReplaceWebElementsInArg(object obj)
+        {
+            if (obj is string || obj is float || obj is double || obj is int || obj is long || obj is bool || obj == null) return obj;
+            if (obj is WebElementAdapter) return (obj as WebElementAdapter).GetSyncWebElement();
+            var dic = obj as IDictionary;
+            var col = obj as IEnumerable;
+           
+            if (dic != null)
+            {
+                var resDic = new Dictionary<string, object>();
+                foreach (DictionaryEntry item in dic)
+                {
+                    resDic.Add(item.Key.ToString(), ReplaceWebElementsInArg(item.Value));
+                }
+                return resDic;
+            }
+            else if (col != null)
+            {
+                var list = new List<object>();
+                foreach (var item in col)
+                {
+                    list.Add(ReplaceWebElementsInArg(item));
+                }
+                return list;
+            }
+            else return obj;
+
+        }
+
 
         public IWebElement FindElement(By by)
         {

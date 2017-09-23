@@ -435,7 +435,8 @@ namespace OpenQA.Selenium
         public void ShouldBeAbleToExecuteABigChunkOfJavascriptCode()
         {
             driver.Url = javascriptPage;
-            string[] fileList = System.IO.Directory.GetFiles("..\\..", "jquery-1.2.6.min.js", System.IO.SearchOption.AllDirectories);
+            var dir = System.IO.Path.Combine(Environment.EnvironmentManager.Instance.CurrentDirectory, "..\\..\\..");
+            string[] fileList = System.IO.Directory.GetFiles(dir, "jquery-*", System.IO.SearchOption.AllDirectories);
             if (fileList.Length > 0)
             {
                 string jquery = System.IO.File.ReadAllText(fileList[0]);

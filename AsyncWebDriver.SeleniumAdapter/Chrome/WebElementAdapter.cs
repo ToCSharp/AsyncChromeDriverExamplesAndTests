@@ -18,6 +18,8 @@ namespace AsyncWebDriver.SeleniumAdapter.Chrome
             this.syncWebElement = syncWebElement;
         }
 
+        public SyncWebElement GetSyncWebElement() => syncWebElement;
+
         public string TagName => syncWebElement.TagName;
 
         public string Text => syncWebElement.Text;
