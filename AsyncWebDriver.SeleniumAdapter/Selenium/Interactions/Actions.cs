@@ -29,12 +29,14 @@ namespace OpenQA.Selenium.Interactions
     {
         private IWebDriver driver;
         private ActionBuilder actionBuilder = new ActionBuilder();
-        private PointerInputDevice defaultMouse = new PointerInputDevice(PointerKind.Mouse, "default mouse");
-        private KeyInputDevice defaultKeyboard = new KeyInputDevice("default keyboard");
+        public PointerInputDevice defaultMouse = new PointerInputDevice(PointerKind.Mouse, "default mouse");
+        public KeyInputDevice defaultKeyboard = new KeyInputDevice("default keyboard");
 
         private IKeyboard keyboard;
         private IMouse mouse;
         private CompositeAction action = new CompositeAction();
+
+        public CompositeAction Action => action;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Actions"/> class.
@@ -383,7 +385,10 @@ namespace OpenQA.Selenium.Interactions
         /// <returns>A composite <see cref="IAction"/> which can be used to perform the actions.</returns>
         public IAction Build()
         {
-            return this;
+            IAction toReturn = new BuiltAction(driver, actionBuilder, action);
+            action = new CompositeAction();
+            actionBuilder = new ActionBuilder();
+            return toReturn;
         }
 
         /// <summary>

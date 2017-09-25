@@ -23,9 +23,11 @@ namespace OpenQA.Selenium.Interactions
     /// <summary>
     /// Defines an action that consists of a list of other actions to be performed in the browser.
     /// </summary>
-    internal class CompositeAction : IAction
+    public class CompositeAction : IAction
     {
         private List<IAction> actionsList = new List<IAction>();
+
+        public List<IAction> ActionsList => actionsList;
 
         /// <summary>
         /// Adds an action to the list of actions to be performed.

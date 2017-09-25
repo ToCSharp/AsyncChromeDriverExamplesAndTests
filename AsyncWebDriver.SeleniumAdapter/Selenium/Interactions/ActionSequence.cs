@@ -32,6 +32,9 @@ namespace OpenQA.Selenium.Interactions
         private List<Interaction> interactions = new List<Interaction>();
         private InputDevice device;
 
+        public InputDevice Device => device;
+        public List<Interaction> Interactions => interactions;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="ActionSequence"/> class.
         /// </summary>

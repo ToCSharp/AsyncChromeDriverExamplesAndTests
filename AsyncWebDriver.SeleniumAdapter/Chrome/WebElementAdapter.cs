@@ -9,7 +9,7 @@ using System.Collections.Generic;
 
 namespace AsyncWebDriver.SeleniumAdapter.Chrome
 {
-    internal class WebElementAdapter : IWebElement, IFindsByLinkText, IFindsById, IFindsByName, IFindsByTagName, IFindsByClassName, IFindsByXPath, IFindsByPartialLinkText, IFindsByCssSelector, IWrapsDriver, ILocatable, ITakesScreenshot, IWebElementReference
+    public class WebElementAdapter : IWebElement, IFindsByLinkText, IFindsById, IFindsByName, IFindsByTagName, IFindsByClassName, IFindsByXPath, IFindsByPartialLinkText, IFindsByCssSelector, IWrapsDriver, ILocatable, ITakesScreenshot, IWebElementReference
     {
         private SyncWebElement syncWebElement;
 

@@ -272,7 +272,7 @@ namespace AsyncWebDriver.SeleniumAdapter.Chrome
 
         public void PerformActions(IList<ActionSequence> actionSequenceList)
         {
-            syncWebDriver.PerformActions(WebDriverConverters.SeleniumActionSequenceList(actionSequenceList));
+            syncWebDriver.PerformActions(WebDriverConverters.SeleniumActionSequenceList(syncWebDriver, actionSequenceList));
         }
 
         public void Quit()

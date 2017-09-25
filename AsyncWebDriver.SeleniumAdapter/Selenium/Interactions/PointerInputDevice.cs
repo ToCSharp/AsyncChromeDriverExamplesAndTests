@@ -29,7 +29,7 @@ namespace OpenQA.Selenium.Interactions
     /// <summary>
     /// Represents the origin of the coordinates for mouse movement.
     /// </summary>
-    internal enum CoordinateOrigin
+    public enum CoordinateOrigin
     {
         /// <summary>
         /// The coordinate origin is the origin of the view port of the browser.
@@ -50,7 +50,7 @@ namespace OpenQA.Selenium.Interactions
     /// <summary>
     /// Specifies the type of pointer a pointer device represents.
     /// </summary>
-    internal enum PointerKind
+    public enum PointerKind
     {
         /// <summary>
         /// The pointer device is a mouse.
@@ -71,7 +71,7 @@ namespace OpenQA.Selenium.Interactions
     /// <summary>
     /// Specifies the button used during a pointer down or up action.
     /// </summary>
-    internal enum MouseButton
+    public enum MouseButton
     {
         /// <summary>
         /// The button used is the primary button.
@@ -92,7 +92,7 @@ namespace OpenQA.Selenium.Interactions
     /// <summary>
     /// Represents a pointer input device, such as a stylus, mouse, or finger on a touch screen.
     /// </summary>
-    internal class PointerInputDevice : InputDevice
+    public class PointerInputDevice : InputDevice
     {
         private PointerKind pointerKind;
 
@@ -213,9 +213,11 @@ namespace OpenQA.Selenium.Interactions
             return new PointerCancelInteraction(this);
         }
 
-        private class PointerDownInteraction : Interaction
+        public class PointerDownInteraction : Interaction
         {
             private MouseButton button;
+
+            public MouseButton Button => button;
 
             public PointerDownInteraction(InputDevice sourceDevice, MouseButton button)
                 : base(sourceDevice)
@@ -238,9 +240,11 @@ namespace OpenQA.Selenium.Interactions
             }
         }
 
-        private class PointerUpInteraction : Interaction
+        public class PointerUpInteraction : Interaction
         {
             private MouseButton button;
+
+            public MouseButton Button => button;
 
             public PointerUpInteraction(InputDevice sourceDevice, MouseButton button)
                 : base(sourceDevice)
@@ -263,7 +267,7 @@ namespace OpenQA.Selenium.Interactions
             }
         }
 
-        private class PointerCancelInteraction : Interaction
+        public class PointerCancelInteraction : Interaction
         {
             public PointerCancelInteraction(InputDevice sourceDevice)
                 : base(sourceDevice)
@@ -283,13 +287,17 @@ namespace OpenQA.Selenium.Interactions
             }
         }
 
-        private class PointerMoveInteraction : Interaction
+        public class PointerMoveInteraction : Interaction
         {
             private IWebElement target;
             private int x = 0;
             private int y = 0;
             private TimeSpan duration = TimeSpan.MinValue;
             private CoordinateOrigin origin = CoordinateOrigin.Pointer;
+
+            public IWebElement Target => target;
+            public int X => x;
+            public int Y => y;
 
             public PointerMoveInteraction(InputDevice sourceDevice, IWebElement target, CoordinateOrigin origin, int x, int y, TimeSpan duration)
                 : base(sourceDevice)

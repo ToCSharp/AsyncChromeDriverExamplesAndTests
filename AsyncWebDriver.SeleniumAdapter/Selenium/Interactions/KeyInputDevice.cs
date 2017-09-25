@@ -27,7 +27,7 @@ namespace OpenQA.Selenium.Interactions
     /// <summary>
     /// Represents a key input device, such as a keyboard.
     /// </summary>
-    internal class KeyInputDevice : InputDevice
+    public class KeyInputDevice : InputDevice
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="KeyInputDevice"/> class.
@@ -88,7 +88,7 @@ namespace OpenQA.Selenium.Interactions
             return new KeyUpInteraction(this, codePoint);
         }
 
-        private class KeyDownInteraction : TypingInteraction
+        public class KeyDownInteraction : TypingInteraction
         {
             public KeyDownInteraction(InputDevice sourceDevice, char codePoint)
                 : base(sourceDevice, "keyDown", codePoint)
@@ -101,7 +101,7 @@ namespace OpenQA.Selenium.Interactions
             }
         }
 
-        private class KeyUpInteraction : TypingInteraction
+        public class KeyUpInteraction : TypingInteraction
         {
             public KeyUpInteraction(InputDevice sourceDevice, char codePoint)
                 : base(sourceDevice, "keyUp", codePoint)
@@ -114,7 +114,7 @@ namespace OpenQA.Selenium.Interactions
             }
         }
 
-        private class TypingInteraction : Interaction
+        public class TypingInteraction : Interaction
         {
             private string type;
             private string value;
@@ -126,7 +126,7 @@ namespace OpenQA.Selenium.Interactions
                 this.value = codePoint.ToString();
             }
 
-            protected string Value
+            public string Value
             {
                 get { return this.value; }
             }

@@ -30,6 +30,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="IAsyncWebBrowserClient, Version=0.1.5.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\IAsyncWebBrowserClient.0.1.5\lib\net452\IAsyncWebBrowserClient.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -89,6 +92,7 @@
     <Compile Include="Selenium\Interactions\ActionBuilder.cs" />
     <Compile Include="Selenium\Interactions\Actions.cs" />
     <Compile Include="Selenium\Interactions\ActionSequence.cs" />
+    <Compile Include="Selenium\Interactions\BuiltAction.cs" />
     <Compile Include="Selenium\Interactions\ButtonReleaseAction.cs" />
     <Compile Include="Selenium\Interactions\ClickAction.cs" />
     <Compile Include="Selenium\Interactions\ClickAndHoldAction.cs" />
@@ -181,10 +185,6 @@
     <ProjectReference Include="..\..\AsyncChromeDriver\AsyncChromeDriver\AsyncChromeDriver.csproj">
       <Project>{b397ff4b-9290-478f-bb70-da91d23e4b68}</Project>
       <Name>AsyncChromeDriver</Name>
-    </ProjectReference>
-    <ProjectReference Include="D:\vs4\IAsyncWebBrowserClient\IAsyncWebBrowserClient\IAsyncWebBrowserClient.csproj">
-      <Project>{11CC358D-3CD1-4A7C-A864-A45F7022AA44}</Project>
-      <Name>IAsyncWebBrowserClient</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

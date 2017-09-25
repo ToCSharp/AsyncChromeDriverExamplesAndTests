@@ -4,7 +4,9 @@ using System.Drawing;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
 using Zu.AsyncWebDriver;
+using Zu.AsyncWebDriver.Remote;
 using Zu.WebBrowser.BasicTypes;
+using System.Linq;
 
 namespace AsyncWebDriver.SeleniumAdapter.Chrome
 {
@@ -26,7 +28,7 @@ namespace AsyncWebDriver.SeleniumAdapter.Chrome
 
         internal static OpenQA.Selenium.Screenshot SeleniumScreenshot(Zu.WebBrowser.BasicTypes.Screenshot screenshot)
         {
-            return new OpenQA.Selenium.Screenshot(screenshot.AsBase64EncodedString) ;
+            return new OpenQA.Selenium.Screenshot(screenshot.AsBase64EncodedString);
         }
 
         internal static Point ToDrawingPoint(WebPoint webPoint)
@@ -34,9 +36,113 @@ namespace AsyncWebDriver.SeleniumAdapter.Chrome
             return new Point(webPoint.X, webPoint.Y);
         }
 
-        internal static IList<Zu.WebBrowser.BasicTypes.ActionSequence> SeleniumActionSequenceList(IList<OpenQA.Selenium.Interactions.ActionSequence> actionSequenceList)
+
+        internal static IList<Zu.WebBrowser.BasicTypes.ActionSequence> SeleniumActionSequenceList(SyncWebDriver syncWebDriver, IList<OpenQA.Selenium.Interactions.ActionSequence> actionSequenceList)
         {
-            throw new NotImplementedException();
+            var actions = new Zu.AsyncWebDriver.Interactions.Actions(syncWebDriver.AsyncDriver);
+            var res = new List<Zu.WebBrowser.BasicTypes.ActionSequence>();
+            foreach (var item in actionSequenceList)
+            {
+                if (/*item.Device.DeviceKind == OpenQA.Selenium.Interactions.InputDeviceKind.Pointer &&*/
+                   item.Device is PointerInputDevice)
+                {
+                    var i = 0;
+                    while (i < item.Interactions.Count)
+                    {
+                        var item2 = item.Interactions[i];
+                        if (item2 is OpenQA.Selenium.Interactions.PauseInteraction)
+                        {
+                            var pi = (OpenQA.Selenium.Interactions.PauseInteraction)item2;
+                            if(pi.Duration.TotalMilliseconds>0) actions.ActionBuilder.AddAction(new Zu.WebBrowser.BasicTypes.PauseInteraction(actions.defaultMouse, pi.Duration));
+                        }
+                        else if (item2 is PointerInputDevice.PointerMoveInteraction)
+                        {
+                            if ((item.Interactions.ElementAtOrDefault(i + 1) as PointerInputDevice.PointerDownInteraction)?.Button == MouseButton.Left &&
+                                (item.Interactions.ElementAtOrDefault(i + 2) as PointerInputDevice.PointerUpInteraction)?.Button == MouseButton.Left)
+                            {
+                                var target = (WebElementAdapter)((PointerInputDevice.PointerMoveInteraction)item2).Target;
+                                if ((item.Interactions.ElementAtOrDefault(i + 3) as PointerInputDevice.PointerDownInteraction)?.Button == MouseButton.Left &&
+                               (item.Interactions.ElementAtOrDefault(i + 4) as PointerInputDevice.PointerUpInteraction)?.Button == MouseButton.Left)
+                                {
+                                    i += 4;
+                                    actions.DoubleClick(target?.GetSyncWebElement().AsyncElement);
+                                }
+                                else
+                                {
+                                    i += 2;
+                                    actions.Click(target?.GetSyncWebElement().AsyncElement);
+                                }
+                            }
+                            else if ((item.Interactions.ElementAtOrDefault(i + 1) as PointerInputDevice.PointerDownInteraction)?.Button == MouseButton.Left)
+                            {
+                                var target = (WebElementAdapter)((PointerInputDevice.PointerMoveInteraction)item2).Target;
+                                i += 1;
+                                actions.ClickAndHold(target?.GetSyncWebElement().AsyncElement);
+                            }
+                            else if ((item.Interactions.ElementAtOrDefault(i + 1) as PointerInputDevice.PointerUpInteraction)?.Button == MouseButton.Left)
+                            {
+                                var target = (WebElementAdapter)((PointerInputDevice.PointerMoveInteraction)item2).Target;
+                                i += 1;
+                                actions.Release(target?.GetSyncWebElement().AsyncElement);
+                            }
+                            else if ((item.Interactions.ElementAtOrDefault(i + 1) as PointerInputDevice.PointerDownInteraction)?.Button == MouseButton.Right &&
+                                     (item.Interactions.ElementAtOrDefault(i + 2) as PointerInputDevice.PointerUpInteraction)?.Button == MouseButton.Right)
+                            {
+                                var target = (WebElementAdapter)((PointerInputDevice.PointerMoveInteraction)item2).Target;
+                                i += 2;
+                                actions.ContextClick(target?.GetSyncWebElement().AsyncElement);
+                            }
+                            else
+                            {
+                                var pmi = (PointerInputDevice.PointerMoveInteraction)item2;
+                                var target = (WebElementAdapter)pmi.Target;
+                                if (pmi.X != 0 || pmi.Y != 0)
+                                    actions.MoveToElement(target?.GetSyncWebElement().AsyncElement, pmi.X, pmi.Y);
+                                else actions.MoveToElement(target?.GetSyncWebElement().AsyncElement);
+                            }
+                        }
+                        else if (item2 is PointerInputDevice.PointerCancelInteraction)
+                        {
+
+                        }
+                        else if (item2 is PointerInputDevice.PointerDownInteraction)
+                        {
+
+                        }
+                        else if (item2 is PointerInputDevice.PointerUpInteraction)
+                        {
+
+                        }
+                        i++;
+                    }
+                }
+                else if (item.Device is KeyInputDevice)
+                {
+                    var i = 0;
+                    while (i < item.Interactions.Count)
+                    {
+                        var item2 = item.Interactions[i];
+                        if (item2 is OpenQA.Selenium.Interactions.PauseInteraction)
+                        {
+                            var pi = (OpenQA.Selenium.Interactions.PauseInteraction)item2;
+                            if (pi.Duration.TotalMilliseconds > 0) actions.ActionBuilder.AddAction(new Zu.WebBrowser.BasicTypes.PauseInteraction(actions.defaultKeyboard, pi.Duration));
+                        }
+                        else if(item2 is KeyInputDevice.KeyDownInteraction)
+                        {
+
+                            var key = ((KeyInputDevice.TypingInteraction)item2).Value;
+                            actions.ActionBuilder.AddAction(actions.defaultKeyboard.CreateKeyDown(key[0]));
+                        }
+                        else if (item2 is KeyInputDevice.KeyUpInteraction)
+                        {
+                            var key = ((KeyInputDevice.TypingInteraction)item2).Value;
+                            actions.ActionBuilder.AddAction(actions.defaultKeyboard.CreateKeyUp(key[0]));
+                        }
+                        i++;
+                    }
+                }
+            }
+            return actions.ActionBuilder.ToActionSequenceList();
         }
     }
 }

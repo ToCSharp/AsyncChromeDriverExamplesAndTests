@@ -28,7 +28,7 @@ namespace OpenQA.Selenium.Interactions
     /// </summary>
     internal class PauseInteraction : Interaction
     {
-        private TimeSpan duration = TimeSpan.Zero;
+        public TimeSpan Duration = TimeSpan.Zero;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="PauseInteraction"/> class.
@@ -52,7 +52,7 @@ namespace OpenQA.Selenium.Interactions
                 throw new ArgumentException("Duration must be greater than or equal to zero", "duration");
             }
 
-            this.duration = duration;
+            this.Duration = duration;
         }
 
         /// <summary>
@@ -64,7 +64,7 @@ namespace OpenQA.Selenium.Interactions
             Dictionary<string, object> toReturn = new Dictionary<string, object>();
 
             toReturn["type"] = "pause";
-            toReturn["duration"] = Convert.ToInt64(this.duration.TotalMilliseconds);
+            toReturn["duration"] = Convert.ToInt64(this.Duration.TotalMilliseconds);
 
             return toReturn;
         }
