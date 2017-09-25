@@ -78,6 +78,13 @@
     <None Include="packages.config" />
     <Content Include="Settings.StyleCop" />
     <Content Include="svgPiechart.xhtml" />
+    <Content Include="Web - Copy.config" />
+    <Content Include="Web - Copy.Debug.config">
+      <DependentUpon>Web - Copy.config</DependentUpon>
+    </Content>
+    <Content Include="Web - Copy.Release.config">
+      <DependentUpon>Web - Copy.config</DependentUpon>
+    </Content>
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -357,7 +364,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>52454</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:52454/</IISUrl>
+          <IISUrl>http://localhost:2310/HtmlForTests</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

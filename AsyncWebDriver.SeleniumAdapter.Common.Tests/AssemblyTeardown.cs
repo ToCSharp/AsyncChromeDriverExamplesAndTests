@@ -14,22 +14,28 @@ namespace OpenQA.Selenium
         [OneTimeSetUp]
         public void RunBeforeAnyTest()
         {
-            EnvironmentManager.Instance.WebServer.Start();
-            //if (EnvironmentManager.Instance.Browser == Browser.Remote)
-            //{
-            //    EnvironmentManager.Instance.RemoteServer.Start();
-            //}
+            if (EnvironmentManager.GetSettingValue("StartTestWebServer") == "true")
+            {
+                EnvironmentManager.Instance.WebServer.Start();
+                //if (EnvironmentManager.Instance.Browser == Browser.Remote)
+                //{
+                //    EnvironmentManager.Instance.RemoteServer.Start();
+                //}
+            }
         }
 
         [OneTimeTearDown]
         public void RunAfterAnyTests()
         {
             EnvironmentManager.Instance.CloseCurrentDriver();
-            EnvironmentManager.Instance.WebServer.Stop();
-            //if (EnvironmentManager.Instance.Browser == Browser.Remote)
-            //{
-            //    EnvironmentManager.Instance.RemoteServer.Stop();
-            //}
+            if (EnvironmentManager.GetSettingValue("StartTestWebServer") == "true")
+            {
+                EnvironmentManager.Instance.WebServer.Stop();
+                //if (EnvironmentManager.Instance.Browser == Browser.Remote)
+                //{
+                //    EnvironmentManager.Instance.RemoteServer.Stop();
+                //}
+            }
         }
     }
 }

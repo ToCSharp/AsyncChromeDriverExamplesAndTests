@@ -65,7 +65,8 @@ namespace OpenQA.Selenium
             driver.Url = framesetPage;
             driver.SwitchTo().Frame(1);
 
-            Assert.AreEqual("2", driver.FindElement(By.Id("pageNumber")).Text);
+            var el = driver.FindElement(By.Id("pageNumber"));
+            Assert.AreEqual("2", el.Text);
         }
 
         [Test]

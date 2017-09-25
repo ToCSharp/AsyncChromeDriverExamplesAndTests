@@ -32,31 +32,31 @@ namespace AsyncWebDriver.SeleniumAdapter.Chrome
 
         public IWebDriver Frame(int frameIndex)
         {
-            syncRemoteTargetLocator.DefaultContent();
+            syncRemoteTargetLocator.Frame(frameIndex);
             return webDriver;
         }
 
         public IWebDriver Frame(string frameName)
         {
-            syncRemoteTargetLocator.DefaultContent();
+            syncRemoteTargetLocator.Frame(frameName); 
             return webDriver;
         }
 
         public IWebDriver Frame(IWebElement frameElement)
         {
-            syncRemoteTargetLocator.DefaultContent();
+            syncRemoteTargetLocator.Frame(((WebElementAdapter)frameElement).GetSyncWebElement());
             return webDriver;
         }
 
         public IWebDriver ParentFrame()
         {
-            syncRemoteTargetLocator.DefaultContent();
+            syncRemoteTargetLocator.ParentFrame();
             return webDriver;
         }
 
         public IWebDriver Window(string windowName)
         {
-            syncRemoteTargetLocator.DefaultContent();
+            syncRemoteTargetLocator.Window(windowName);
             return webDriver;
         }
     }
