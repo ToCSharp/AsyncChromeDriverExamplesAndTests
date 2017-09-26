@@ -1,0 +1,191 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{91CA8B5C-701A-4A23-B4F7-8968C7B80EAD}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>AsyncChromeDriver.SeleniumAdapter</RootNamespace>
+    <AssemblyName>AsyncChromeDriver.SeleniumAdapter</AssemblyName>
+    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AsyncChromeDriver, Version=0.2.6.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\AsyncChromeDriver.0.2.6\lib\net461\AsyncChromeDriver.dll</HintPath>
+    </Reference>
+    <Reference Include="AsyncWebDriver, Version=1.2.8.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\AsyncWebDriver.1.2.8\lib\net452\AsyncWebDriver.dll</HintPath>
+    </Reference>
+    <Reference Include="BaristaLabs.ChromeDevTools.Runtime.Framework, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\AsyncChromeDriver.0.2.6\lib\net461\BaristaLabs.ChromeDevTools.Runtime.Framework.dll</HintPath>
+    </Reference>
+    <Reference Include="IAsyncWebBrowserClient, Version=0.1.5.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\IAsyncWebBrowserClient.0.1.5\lib\net452\IAsyncWebBrowserClient.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Threading.Tasks.Dataflow, Version=4.6.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Threading.Tasks.Dataflow.4.8.0\lib\netstandard2.0\System.Threading.Tasks.Dataflow.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WebSocket4Net, Version=0.14.1.0, Culture=neutral, PublicKeyToken=eb4e154b696bf72a, processorArchitecture=MSIL">
+      <HintPath>..\packages\WebSocket4Net.0.14.1\lib\net45\WebSocket4Net.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Chrome\Alert.cs" />
+    <Compile Include="Chrome\ChromeDriver.cs" />
+    <Compile Include="Chrome\CoordinatesAdapter.cs" />
+    <Compile Include="Chrome\KeyboardAdapter.cs" />
+    <Compile Include="Chrome\MouseAdapter.cs" />
+    <Compile Include="Chrome\NavigateAdapter.cs" />
+    <Compile Include="Chrome\TargetLocatorAdapter.cs" />
+    <Compile Include="Chrome\WebDriverAdapter.cs" />
+    <Compile Include="Chrome\WebDriverConverters.cs" />
+    <Compile Include="Chrome\WebDriverOptionsAdapter.cs" />
+    <Compile Include="Chrome\WebDriverTimeoutsAdapter.cs" />
+    <Compile Include="Chrome\WebElementAdapter.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Selenium\By.cs" />
+    <Compile Include="Selenium\Cookie.cs" />
+    <Compile Include="Selenium\ElementNotVisibleException.cs" />
+    <Compile Include="Selenium\HTML5\AppCacheStatus.cs" />
+    <Compile Include="Selenium\HTML5\IApplicationCache.cs" />
+    <Compile Include="Selenium\HTML5\IHasApplicationCache.cs" />
+    <Compile Include="Selenium\HTML5\IHasLocationContext.cs" />
+    <Compile Include="Selenium\HTML5\IHasWebStorage.cs" />
+    <Compile Include="Selenium\HTML5\ILocalStorage.cs" />
+    <Compile Include="Selenium\HTML5\ILocationContext.cs" />
+    <Compile Include="Selenium\HTML5\ISessionStorage.cs" />
+    <Compile Include="Selenium\HTML5\IWebStorage.cs" />
+    <Compile Include="Selenium\HTML5\Location.cs" />
+    <Compile Include="Selenium\IAlert.cs" />
+    <Compile Include="Selenium\ICapabilities.cs" />
+    <Compile Include="Selenium\ICookieJar.cs" />
+    <Compile Include="Selenium\IHasCapabilities.cs" />
+    <Compile Include="Selenium\IHasInputDevices.cs" />
+    <Compile Include="Selenium\IHasTouchScreen.cs" />
+    <Compile Include="Selenium\IJavascriptExecutor.cs" />
+    <Compile Include="Selenium\IKeyboard.cs" />
+    <Compile Include="Selenium\ILocatable.cs" />
+    <Compile Include="Selenium\ILogs.cs" />
+    <Compile Include="Selenium\IMouse.cs" />
+    <Compile Include="Selenium\INavigation.cs" />
+    <Compile Include="Selenium\Interactions\ActionBuilder.cs" />
+    <Compile Include="Selenium\Interactions\Actions.cs" />
+    <Compile Include="Selenium\Interactions\ActionSequence.cs" />
+    <Compile Include="Selenium\Interactions\BuiltAction.cs" />
+    <Compile Include="Selenium\Interactions\ButtonReleaseAction.cs" />
+    <Compile Include="Selenium\Interactions\ClickAction.cs" />
+    <Compile Include="Selenium\Interactions\ClickAndHoldAction.cs" />
+    <Compile Include="Selenium\Interactions\CompositeAction.cs" />
+    <Compile Include="Selenium\Interactions\ContextClickAction.cs" />
+    <Compile Include="Selenium\Interactions\DoubleClickAction.cs" />
+    <Compile Include="Selenium\Interactions\DoubleTapAction.cs" />
+    <Compile Include="Selenium\Interactions\FlickAction.cs" />
+    <Compile Include="Selenium\Interactions\IAction.cs" />
+    <Compile Include="Selenium\Interactions\ICoordinates.cs" />
+    <Compile Include="Selenium\Interactions\InputDevice.cs" />
+    <Compile Include="Selenium\Interactions\InputDeviceKind.cs" />
+    <Compile Include="Selenium\Interactions\Interaction.cs" />
+    <Compile Include="Selenium\Interactions\KeyboardAction.cs" />
+    <Compile Include="Selenium\Interactions\KeyDownAction.cs" />
+    <Compile Include="Selenium\Interactions\KeyInputDevice.cs" />
+    <Compile Include="Selenium\Interactions\KeyUpAction.cs" />
+    <Compile Include="Selenium\Interactions\LongPressAction.cs" />
+    <Compile Include="Selenium\Interactions\MouseAction.cs" />
+    <Compile Include="Selenium\Interactions\MoveMouseAction.cs" />
+    <Compile Include="Selenium\Interactions\MoveToOffsetAction.cs" />
+    <Compile Include="Selenium\Interactions\PauseInteraction.cs" />
+    <Compile Include="Selenium\Interactions\PointerInputDevice.cs" />
+    <Compile Include="Selenium\Interactions\ScreenMoveAction.cs" />
+    <Compile Include="Selenium\Interactions\ScreenPressAction.cs" />
+    <Compile Include="Selenium\Interactions\ScreenReleaseAction.cs" />
+    <Compile Include="Selenium\Interactions\ScrollAction.cs" />
+    <Compile Include="Selenium\Interactions\SendKeysAction.cs" />
+    <Compile Include="Selenium\Interactions\SingleKeyAction.cs" />
+    <Compile Include="Selenium\Interactions\SingleTapAction.cs" />
+    <Compile Include="Selenium\Interactions\TouchAction.cs" />
+    <Compile Include="Selenium\Interactions\TouchActions.cs" />
+    <Compile Include="Selenium\Interactions\WebDriverAction.cs" />
+    <Compile Include="Selenium\Internal\AsyncJavaScriptExecutor.cs" />
+    <Compile Include="Selenium\Internal\FileUtilities.cs" />
+    <Compile Include="Selenium\Internal\IActionExecutor.cs" />
+    <Compile Include="Selenium\Internal\IFindsByClassName.cs" />
+    <Compile Include="Selenium\Internal\IFindsByCssSelector.cs" />
+    <Compile Include="Selenium\Internal\IFindsById.cs" />
+    <Compile Include="Selenium\Internal\IFindsByLinkText.cs" />
+    <Compile Include="Selenium\Internal\IFindsByName.cs" />
+    <Compile Include="Selenium\Internal\IFindsByPartialLinkText.cs" />
+    <Compile Include="Selenium\Internal\IFindsByTagName.cs" />
+    <Compile Include="Selenium\Internal\IFindsByXPath.cs" />
+    <Compile Include="Selenium\Internal\IWebElementReference.cs" />
+    <Compile Include="Selenium\Internal\IWrapsDriver.cs" />
+    <Compile Include="Selenium\Internal\IWrapsElement.cs" />
+    <Compile Include="Selenium\Internal\NativeMethods.cs" />
+    <Compile Include="Selenium\Internal\PortUtilities.cs" />
+    <Compile Include="Selenium\Internal\ResourceUtilities.cs" />
+    <Compile Include="Selenium\Internal\ReturnedCookie.cs" />
+    <Compile Include="Selenium\Internal\ZipStorer.cs" />
+    <Compile Include="Selenium\InvalidCookieDomainException.cs" />
+    <Compile Include="Selenium\InvalidElementStateException.cs" />
+    <Compile Include="Selenium\InvalidSelectorException.cs" />
+    <Compile Include="Selenium\IOptions.cs" />
+    <Compile Include="Selenium\ISearchContext.cs" />
+    <Compile Include="Selenium\ITakesScreenshot.cs" />
+    <Compile Include="Selenium\ITargetLocator.cs" />
+    <Compile Include="Selenium\ITimeouts.cs" />
+    <Compile Include="Selenium\ITouchScreen.cs" />
+    <Compile Include="Selenium\IWebDriver.cs" />
+    <Compile Include="Selenium\IWebElement.cs" />
+    <Compile Include="Selenium\IWindow.cs" />
+    <Compile Include="Selenium\Keys.cs" />
+    <Compile Include="Selenium\LogEntry.cs" />
+    <Compile Include="Selenium\LogLevel.cs" />
+    <Compile Include="Selenium\NoAlertPresentException.cs" />
+    <Compile Include="Selenium\NoSuchElementException.cs" />
+    <Compile Include="Selenium\NoSuchFrameException.cs" />
+    <Compile Include="Selenium\NoSuchWindowException.cs" />
+    <Compile Include="Selenium\NotFoundException.cs" />
+    <Compile Include="Selenium\Platform.cs" />
+    <Compile Include="Selenium\Remote\CapabilityType.cs" />
+    <Compile Include="Selenium\Screenshot.cs" />
+    <Compile Include="Selenium\StaleElementReferenceException.cs" />
+    <Compile Include="Selenium\UnhandledAlertException.cs" />
+    <Compile Include="Selenium\WebDriverException.cs" />
+    <Compile Include="Selenium\WebDriverTimeoutException.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
