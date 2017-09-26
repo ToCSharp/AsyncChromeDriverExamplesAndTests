@@ -1,0 +1,5 @@
+AsyncChromeDriver.SeleniumAdapter is based on selenium dotnet WebDriver hosted on 
+https://github.com/SeleniumHQ/selenium/tree/master/dotnet/src/webdriver.
+
+
+For third-party license information see the THIRD-PARTY-NOTICES file which accompanies this NOTICE file.
