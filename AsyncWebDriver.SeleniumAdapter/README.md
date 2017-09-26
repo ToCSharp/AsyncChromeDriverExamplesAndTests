@@ -1,0 +1,1 @@
+﻿### Look [AsyncChromeDriver.SeleniumAdapter](https://github.com/ToCSharp/AsyncChromeDriverExamplesAndTests/tree/master/AsyncChromeDriver.SeleniumAdapter)

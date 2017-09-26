@@ -1,4 +1,5 @@
-﻿## AsyncChromeDriver.SeleniumAdapter
+﻿
+## AsyncChromeDriver.SeleniumAdapter
 
 Adapter to run Selenium tests through AsyncChromeDriver.  
 It is experimental project, firstly for testing my other projects: [IAsyncWebBrowserClient](https://github.com/ToCSharp/IAsyncWebBrowserClient), [AsyncChromeDriver](https://github.com/ToCSharp/AsyncChromeDriver), [AsyncWebDriver](https://github.com/ToCSharp/AsyncWebDriver).  

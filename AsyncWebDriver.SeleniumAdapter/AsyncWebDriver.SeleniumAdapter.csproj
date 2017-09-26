@@ -176,6 +176,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <None Include="README.md" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="D:\vs3\AsyncWebDriver\AsyncWebDriver\AsyncWebDriver.csproj">
