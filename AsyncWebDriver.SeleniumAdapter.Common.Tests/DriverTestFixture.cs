@@ -2,7 +2,7 @@ using NUnit.Framework;
 using OpenQA.Selenium.Environment;
 using System;
 //using OpenQA.Selenium.Remote;
-using AsyncWebDriver.SeleniumAdapter;
+//using AsyncWebDriver.SeleniumAdapter;
 
 namespace OpenQA.Selenium
 {

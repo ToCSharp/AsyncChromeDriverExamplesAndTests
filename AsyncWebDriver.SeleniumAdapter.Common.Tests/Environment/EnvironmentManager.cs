@@ -1,7 +1,7 @@
 using System;
 using System.Reflection;
 using System.IO;
-using AsyncWebDriver.SeleniumAdapter;
+//using AsyncWebDriver.SeleniumAdapter;
 
 namespace OpenQA.Selenium.Environment
 {
@@ -17,6 +17,7 @@ namespace OpenQA.Selenium.Environment
         private TestWebServer webServer;
         //RemoteSeleniumServer remoteServer;
         private string remoteCapabilities;
+        private string driverStringArg;
 
         private EnvironmentManager()
         {
@@ -24,6 +25,7 @@ namespace OpenQA.Selenium.Environment
             try
             {
                 string driverClassName = GetSettingValue("Driver");
+                driverStringArg = GetSettingValue("DriverStringArg");
                 string assemblyName = GetSettingValue("Assembly");
                 Assembly assembly = Assembly.Load(assemblyName);
                 driverType = assembly.GetType(driverClassName);
@@ -132,6 +134,7 @@ namespace OpenQA.Selenium.Environment
 
         public IWebDriver CreateDriverInstance()
         {
+            if(!string.IsNullOrWhiteSpace(driverStringArg)) return (IWebDriver)Activator.CreateInstance(driverType, driverStringArg);
             return (IWebDriver)Activator.CreateInstance(driverType);
         }
 

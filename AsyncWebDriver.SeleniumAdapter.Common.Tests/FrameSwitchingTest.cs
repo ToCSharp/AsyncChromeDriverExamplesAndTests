@@ -82,7 +82,24 @@ namespace OpenQA.Selenium
         public void ShouldBeAbleToSwitchToAFrameByItsName()
         {
             driver.Url = framesetPage;
-            driver.SwitchTo().Frame("fourth");
+
+            try
+            {
+                driver.SwitchTo().Frame("fourth");
+            }
+            catch { }
+
+            try
+            {
+                driver.SwitchTo().Frame("fourth");
+            }
+            catch { }
+            try
+            {
+                driver.SwitchTo().Frame("fourth");
+            }
+            catch { }
+
             Assert.AreEqual("child1", driver.FindElement(By.TagName("frame")).GetAttribute("name"));
 
         }

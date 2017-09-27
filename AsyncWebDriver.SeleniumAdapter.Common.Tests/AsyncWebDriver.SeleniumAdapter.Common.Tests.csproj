@@ -129,9 +129,13 @@
     <Compile Include="XPathElementFindingTest.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\AsyncWebDriver.SeleniumAdapter\AsyncWebDriver.SeleniumAdapter.csproj">
-      <Project>{8ba175b3-1186-4b8e-b25e-3402e883c1ab}</Project>
-      <Name>AsyncWebDriver.SeleniumAdapter</Name>
+    <ProjectReference Include="..\AsyncFirefoxDriver.SeleniumAdapter\AsyncFirefoxDriver.SeleniumAdapter.csproj">
+      <Project>{10a3e667-e127-4423-88d4-8ec0a8ae453c}</Project>
+      <Name>AsyncFirefoxDriver.SeleniumAdapter</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SeleniumInterfaces\SeleniumInterfaces.csproj">
+      <Project>{073b243f-0cd4-47c4-8008-17a62d3f0adc}</Project>
+      <Name>SeleniumInterfaces</Name>
     </ProjectReference>
     <ProjectReference Include="D:\vs3\AsyncWebDriver\AsyncWebDriver\AsyncWebDriver.csproj">
       <Project>{489fd59f-d739-4144-89b8-b5a719bcb120}</Project>
