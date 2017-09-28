@@ -7,7 +7,7 @@ namespace OpenQA.Selenium.Environment
 {
     public class EnvironmentManager
     {
-        public static Browser CurrentTestingBrowser = Browser.Chrome;
+        public static Browser CurrentTestingBrowser = (Browser)Enum.Parse(typeof(Browser), GetSettingValue("DriverName"));// Browser.Chrome;
 
         private static EnvironmentManager instance;
         private Type driverType;

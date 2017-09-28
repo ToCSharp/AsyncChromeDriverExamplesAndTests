@@ -13,11 +13,50 @@ namespace Zu.AsyncFirefoxDriver.SeleniumAdapter
             this.coordinates = coordinates;
         }
 
-        public Point LocationOnScreen => WebDriverConverters.ToDrawingPoint(coordinates.LocationOnScreen());
+        public Point LocationOnScreen
+        {
+            get
+            {
+                try { return WebDriverConverters.ToDrawingPoint(coordinates.LocationOnScreen()); }
+                catch (Zu.WebBrowser.BasicTypes.WebBrowserException webDriverException)
+                {
+                    throw WebDriverConverters.ToSeleniumException(webDriverException);
+                }
+                catch { throw; }
+            }
+        }
 
-        public Point LocationInViewport => WebDriverConverters.ToDrawingPoint(coordinates.LocationInViewport());
+        public Point LocationInViewport
+        {
+            get
+            {
+                try
+                {
+                    return WebDriverConverters.ToDrawingPoint(coordinates.LocationInViewport());
+                }
+                catch (Zu.WebBrowser.BasicTypes.WebBrowserException webDriverException)
+                {
+                    throw WebDriverConverters.ToSeleniumException(webDriverException);
+                }
+                catch { throw; }
+            }
+        }
 
-        public Point LocationInDom => WebDriverConverters.ToDrawingPoint(coordinates.LocationInDom());
+        public Point LocationInDom
+        {
+            get
+            {
+                try
+                {
+                    return WebDriverConverters.ToDrawingPoint(coordinates.LocationInDom());
+                }
+                catch (Zu.WebBrowser.BasicTypes.WebBrowserException webDriverException)
+                {
+                    throw WebDriverConverters.ToSeleniumException(webDriverException);
+                }
+                catch { throw; }
+            }
+        }
 
         public object AuxiliaryLocator => coordinates.AuxiliaryLocator;
     }

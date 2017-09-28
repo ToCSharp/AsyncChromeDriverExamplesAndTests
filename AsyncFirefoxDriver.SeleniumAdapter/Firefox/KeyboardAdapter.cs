@@ -14,17 +14,41 @@ namespace Zu.AsyncFirefoxDriver.SeleniumAdapter
 
         public void PressKey(string keyToPress)
         {
-            keyboard.PressKey(keyToPress);
+            try
+            {
+                keyboard.PressKey(keyToPress);
+            }
+            catch (Zu.WebBrowser.BasicTypes.WebBrowserException webDriverException)
+            {
+                throw WebDriverConverters.ToSeleniumException(webDriverException);
+            }
+            catch { throw; }
         }
 
         public void ReleaseKey(string keyToRelease)
         {
-            keyboard.ReleaseKey(keyToRelease);
+            try
+            {
+                keyboard.ReleaseKey(keyToRelease);
+            }
+            catch (Zu.WebBrowser.BasicTypes.WebBrowserException webDriverException)
+            {
+                throw WebDriverConverters.ToSeleniumException(webDriverException);
+            }
+            catch { throw; }
         }
 
         public void SendKeys(string keySequence)
         {
-            keyboard.SendKeys(keySequence);
+            try
+            {
+                keyboard.SendKeys(keySequence);
+            }
+            catch (Zu.WebBrowser.BasicTypes.WebBrowserException webDriverException)
+            {
+                throw WebDriverConverters.ToSeleniumException(webDriverException);
+            }
+            catch { throw; }
         }
     }
 }

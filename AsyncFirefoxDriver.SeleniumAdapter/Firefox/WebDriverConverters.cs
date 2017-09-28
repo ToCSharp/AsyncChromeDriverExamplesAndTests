@@ -144,5 +144,35 @@ namespace Zu.AsyncFirefoxDriver.SeleniumAdapter
             }
             return actions.ActionBuilder.ToActionSequenceList();
         }
+
+        public static Exception ToSeleniumException(WebBrowserException webDriverException)
+        {
+            switch (webDriverException.Error)
+            {
+                case "stale element reference": return new StaleElementReferenceException(webDriverException.Message);
+                case "invalid element state": return new InvalidElementStateException(webDriverException.Message);
+                case "No frame element found with name or id":
+                case "no such frame":
+                    return new OpenQA.Selenium.NoSuchFrameException(webDriverException.Message);
+                case "no such element":
+                    return new OpenQA.Selenium.NoSuchElementException(webDriverException.Message);
+                case "invalid selector":
+                    return new OpenQA.Selenium.InvalidSelectorException(webDriverException.Message);
+                case "script timeout":
+                    return new OpenQA.Selenium.WebDriverTimeoutException(webDriverException.Message);
+            }
+            return new ArgumentOutOfRangeException(nameof(webDriverException), webDriverException.Error);
+        }
+
+        //public static void ThrowSeleniumException(Zu.WebBrowser.BasicTypes.WebBrowserException webDriverException)
+        //{
+        //    switch(webDriverException.Error)
+        //    {
+        //        case "stale element reference": throw new StaleElementReferenceException(webDriverException.Message);
+        //    }
+        //    throw new ArgumentOutOfRangeException(nameof(webDriverException), webDriverException.Error);
+        //}
+
+     
     }
 }

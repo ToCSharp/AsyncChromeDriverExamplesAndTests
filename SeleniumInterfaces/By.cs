@@ -193,7 +193,7 @@ namespace OpenQA.Selenium
         {
             if (xpathToFind == null)
             {
-                throw new ArgumentNullException("xpathToFind", "Cannot find elements when the XPath expression is null.");
+                throw new InvalidSelectorException("Cannot find elements when the XPath expression is null.");
             }
 
             By by = new By();
@@ -217,7 +217,7 @@ namespace OpenQA.Selenium
         {
             if (classNameToFind == null)
             {
-                throw new ArgumentNullException("classNameToFind", "Cannot find elements when the class name expression is null.");
+                throw new InvalidSelectorException("Cannot find elements when the class name expression is null.");
             }
 
             By by = new By();
@@ -256,9 +256,9 @@ namespace OpenQA.Selenium
         /// <returns>A <see cref="By"/> object the driver can use to find the elements.</returns>
         public static By TagName(string tagNameToFind)
         {
-            if (tagNameToFind == null)
+            if (string.IsNullOrWhiteSpace(tagNameToFind))
             {
-                throw new ArgumentNullException("tagNameToFind", "Cannot find elements when name tag name is null.");
+                throw new InvalidSelectorException("Cannot find elements when name tag name is null or whitespace.");
             }
 
             By by = new By();
@@ -280,7 +280,7 @@ namespace OpenQA.Selenium
         {
             if (cssSelectorToFind == null)
             {
-                throw new ArgumentNullException("cssSelectorToFind", "Cannot find elements when name CSS selector is null.");
+                throw new InvalidSelectorException("Cannot find elements when name CSS selector is null.");
             }
 
             By by = new By();
