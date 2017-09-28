@@ -262,7 +262,7 @@ namespace Zu.AsyncChromeDriver.SeleniumAdapter
 
         public IOptions Manage()
         {
-            return new WebDriverOptionsAdapter(syncWebDriver.Manage());
+            return new WebDriverOptionsAdapter(syncWebDriver.Options());
         }
 
         public INavigation Navigate()
