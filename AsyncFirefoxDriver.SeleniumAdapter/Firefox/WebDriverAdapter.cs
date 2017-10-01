@@ -169,15 +169,15 @@ namespace Zu.AsyncFirefoxDriver.SeleniumAdapter
             try
             {
                 var el = syncWebDriver.FindElement(WebDriverConverters.By(by));
-                if (el == null && syncWebDriver.Options().Timeouts.GetImplicitWait() != default(TimeSpan))
-                {
-                    var waitEnd = DateTime.Now + syncWebDriver.Options().Timeouts.GetImplicitWait();
-                    while (el == null && DateTime.Now < waitEnd)
-                    {
-                        Thread.Sleep(50);
-                        el = syncWebDriver.FindElement(WebDriverConverters.By(by));
-                    }
-                }
+                //if (el == null && syncWebDriver.Options().Timeouts.GetImplicitWait() != default(TimeSpan))
+                //{
+                //    var waitEnd = DateTime.Now + syncWebDriver.Options().Timeouts.GetImplicitWait();
+                //    while (el == null && DateTime.Now < waitEnd)
+                //    {
+                //        Thread.Sleep(50);
+                //        el = syncWebDriver.FindElement(WebDriverConverters.By(by));
+                //    }
+                //}
                 return new WebElementAdapter(el);
             }
             catch (Zu.WebBrowser.BasicTypes.WebBrowserException webDriverException)

@@ -16,18 +16,60 @@ namespace Zu.AsyncChromeDriver.SeleniumAdapter
 
         public TimeSpan ImplicitWait
         {
-            get => timeouts.GetImplicitWait();
-            set => timeouts.SetImplicitWait(value);
+            get
+            {
+                try
+                {
+                    return timeouts.GetImplicitWait();
+                }
+                catch { throw; }
+            }
+            set
+            {
+                try
+                {
+                    timeouts.SetImplicitWait(value);
+                }
+                catch { throw; }
+            }
         }
         public TimeSpan AsynchronousJavaScript
         {
-            get => timeouts.GetAsynchronousJavaScript();
-            set => timeouts.SetAsynchronousJavaScript(value);
+            get
+            {
+                try
+                {
+                    return timeouts.GetAsynchronousJavaScript();
+                }
+                catch { throw; }
+            }
+            set
+            {
+                try
+                {
+                    timeouts.SetAsynchronousJavaScript(value);
+                }
+                catch { throw; }
+            }
         }
         public TimeSpan PageLoad
         {
-            get => timeouts.GetPageLoad();
-            set => timeouts.SetPageLoad(value);
+            get
+            {
+                try
+                {
+                    return timeouts.GetPageLoad();
+                }
+                catch { throw; }
+            }
+            set
+            {
+                try
+                {
+                    timeouts.SetPageLoad(value);
+                }
+                catch { throw; }
+            }
         }
 
         public ITimeouts ImplicitlyWait(TimeSpan timeToWait)

@@ -16,48 +16,112 @@ namespace Zu.AsyncChromeDriver.SeleniumAdapter
 
         public IWebElement ActiveElement()
         {
-            return new WebElementAdapter(syncRemoteTargetLocator.ActiveElement());
+            try
+            {
+                return new WebElementAdapter(syncRemoteTargetLocator.ActiveElement(), webDriver);
+            }
+            catch (Zu.WebBrowser.BasicTypes.WebBrowserException webDriverException)
+            {
+                throw WebDriverConverters.ToSeleniumException(webDriverException);
+            }
+            catch { throw; }
         }
 
         public IAlert Alert()
         {
-            return new Alert(syncRemoteTargetLocator.Alert());
+            try
+            {
+                return new Alert(syncRemoteTargetLocator.Alert());
+            }
+            catch (Zu.WebBrowser.BasicTypes.WebBrowserException webDriverException)
+            {
+                throw WebDriverConverters.ToSeleniumException(webDriverException);
+            }
+            catch { throw; }
         }
 
         public IWebDriver DefaultContent()
         {
-            syncRemoteTargetLocator.DefaultContent();
-            return webDriver;
+            try
+            {
+                syncRemoteTargetLocator.DefaultContent();
+                return webDriver;
+            }
+            catch (Zu.WebBrowser.BasicTypes.WebBrowserException webDriverException)
+            {
+                throw WebDriverConverters.ToSeleniumException(webDriverException);
+            }
+            catch { throw; }
         }
 
         public IWebDriver Frame(int frameIndex)
         {
-            syncRemoteTargetLocator.Frame(frameIndex);
-            return webDriver;
+            try
+            {
+                syncRemoteTargetLocator.Frame(frameIndex);
+                return webDriver;
+            }
+            catch (Zu.WebBrowser.BasicTypes.WebBrowserException webDriverException)
+            {
+                throw WebDriverConverters.ToSeleniumException(webDriverException);
+            }
+            catch { throw; }
         }
 
         public IWebDriver Frame(string frameName)
         {
-            syncRemoteTargetLocator.Frame(frameName); 
-            return webDriver;
+            try
+            {
+                syncRemoteTargetLocator.Frame(frameName);
+                return webDriver;
+            }
+            catch (Zu.WebBrowser.BasicTypes.WebBrowserException webDriverException)
+            {
+                throw WebDriverConverters.ToSeleniumException(webDriverException);
+            }
+            catch { throw; }
         }
 
         public IWebDriver Frame(IWebElement frameElement)
         {
-            syncRemoteTargetLocator.Frame(((WebElementAdapter)frameElement).GetSyncWebElement());
-            return webDriver;
+            try
+            {
+                syncRemoteTargetLocator.Frame(((WebElementAdapter)frameElement).GetSyncWebElement());
+                return webDriver;
+            }
+            catch (Zu.WebBrowser.BasicTypes.WebBrowserException webDriverException)
+            {
+                throw WebDriverConverters.ToSeleniumException(webDriverException);
+            }
+            catch { throw; }
         }
 
         public IWebDriver ParentFrame()
         {
-            syncRemoteTargetLocator.ParentFrame();
-            return webDriver;
+            try
+            {
+                syncRemoteTargetLocator.ParentFrame();
+                return webDriver;
+            }
+            catch (Zu.WebBrowser.BasicTypes.WebBrowserException webDriverException)
+            {
+                throw WebDriverConverters.ToSeleniumException(webDriverException);
+            }
+            catch { throw; }
         }
 
         public IWebDriver Window(string windowName)
         {
-            syncRemoteTargetLocator.Window(windowName);
-            return webDriver;
+            try
+            {
+                syncRemoteTargetLocator.Window(windowName);
+                return webDriver;
+            }
+            catch (Zu.WebBrowser.BasicTypes.WebBrowserException webDriverException)
+            {
+                throw WebDriverConverters.ToSeleniumException(webDriverException);
+            }
+            catch { throw; }
         }
     }
 }

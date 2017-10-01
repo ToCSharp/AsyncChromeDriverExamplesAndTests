@@ -18,11 +18,15 @@ namespace Zu.AsyncChromeDriver.SeleniumAdapter
         private Zu.AsyncWebDriver.Remote.SyncWebDriver syncWebDriver;
 
         public WebDriverAdapter()
+            :this(null)
         {
-            asyncChromeDriver = new Zu.Chrome.AsyncChromeDriver();
-            asyncChromeDriver.Session.ImplicitWait = TimeSpan.FromMilliseconds(500);
+        }
+        public WebDriverAdapter(string profileName)
+        {
+            asyncChromeDriver = profileName == null ? new Zu.Chrome.AsyncChromeDriver() : new Zu.Chrome.AsyncChromeDriver(profileName);
             asyncWebDriver = new Zu.AsyncWebDriver.Remote.WebDriver(asyncChromeDriver);
             syncWebDriver = new Zu.AsyncWebDriver.Remote.SyncWebDriver(asyncWebDriver);
+            //syncWebDriver.Options().Timeouts.SetImplicitWait(TimeSpan.FromMilliseconds(500));
         }
         public string Url { get => syncWebDriver.Url; set => Navigate().GoToUrl(value); }
 
@@ -64,14 +68,33 @@ namespace Zu.AsyncChromeDriver.SeleniumAdapter
 
         public object ExecuteAsyncScript(string script, params object[] args)
         {
-            var res = syncWebDriver.ExecuteAsyncScript(script, ReplaceWebElementsInArgs(args));
+            object res = null;
+            try
+            {
+                res = syncWebDriver.ExecuteAsyncScript(script, ReplaceWebElementsInArgs(args));
+            }
+            catch (Zu.WebBrowser.BasicTypes.WebBrowserException webDriverException)
+            {
+                throw WebDriverConverters.ToSeleniumException(webDriverException);
+            }
+            catch { throw; }
             res = ReplaceWebElements(res);
             return res;
         }
 
         public object ExecuteScript(string script, params object[] args)
         {
-            var res = syncWebDriver.ExecuteScript(script, ReplaceWebElementsInArgs(args));
+            object res = null;
+            try
+            {
+                res = syncWebDriver.ExecuteScript(script, ReplaceWebElementsInArgs(args));
+            }
+            catch (Zu.WebBrowser.BasicTypes.WebBrowserException webDriverException)
+            {
+                throw WebDriverConverters.ToSeleniumException(webDriverException);
+            }
+            catch { throw; }
+
             res = ReplaceWebElements(res);
             return res;
         }
@@ -79,7 +102,7 @@ namespace Zu.AsyncChromeDriver.SeleniumAdapter
         private object ReplaceWebElements(object obj)
         {
             if (obj is string || obj is float || obj is double || obj is int || obj is long || obj is bool || obj == null) return obj;
-            if (obj is Zu.AsyncWebDriver.Remote.SyncWebElement) return new WebElementAdapter(obj as Zu.AsyncWebDriver.Remote.SyncWebElement);
+            if (obj is Zu.AsyncWebDriver.Remote.SyncWebElement) return new WebElementAdapter(obj as Zu.AsyncWebDriver.Remote.SyncWebElement, this);
             var col = obj as IEnumerable;
             var dic = obj as IDictionary;
             if (dic != null)
@@ -98,7 +121,7 @@ namespace Zu.AsyncChromeDriver.SeleniumAdapter
                 {
                     list.Add(ReplaceWebElements(item));
                 }
-                if (list.All(v => v is WebElementAdapter)) return new ReadOnlyCollection<IWebElement>(list.Cast<IWebElement>().ToList());
+                if (list.Any() && list.All(v => v is WebElementAdapter)) return new ReadOnlyCollection<IWebElement>(list.Cast<IWebElement>().ToList());
                 return new ReadOnlyCollection<object>(list);
             }
             else return obj;
@@ -121,7 +144,7 @@ namespace Zu.AsyncChromeDriver.SeleniumAdapter
             if (obj is WebElementAdapter) return (obj as WebElementAdapter).GetSyncWebElement();
             var dic = obj as IDictionary;
             var col = obj as IEnumerable;
-           
+
             if (dic != null)
             {
                 var resDic = new Dictionary<string, object>();
@@ -147,17 +170,25 @@ namespace Zu.AsyncChromeDriver.SeleniumAdapter
 
         public IWebElement FindElement(By by)
         {
-            var el = syncWebDriver.FindElement(WebDriverConverters.By(by));
-            if (el == null && asyncChromeDriver.Session.ImplicitWait != default(TimeSpan))
+            try
             {
-                var waitEnd = DateTime.Now + asyncChromeDriver.Session.ImplicitWait;
-                while (el == null && DateTime.Now < waitEnd)
-                {
-                    Thread.Sleep(50);
-                    el = syncWebDriver.FindElement(WebDriverConverters.By(by));
-                }
+                var el = syncWebDriver.FindElement(WebDriverConverters.By(by));
+                //if (el == null && syncWebDriver.Options().Timeouts.GetImplicitWait() != default(TimeSpan))
+                //{
+                //    var waitEnd = DateTime.Now + syncWebDriver.Options().Timeouts.GetImplicitWait();
+                //    while (el == null && DateTime.Now < waitEnd)
+                //    {
+                //        Thread.Sleep(50);
+                //        el = syncWebDriver.FindElement(WebDriverConverters.By(by));
+                //    }
+                //}
+                return new WebElementAdapter(el, this);
             }
-            return new WebElementAdapter(el);
+            catch (Zu.WebBrowser.BasicTypes.WebBrowserException webDriverException)
+            {
+                throw WebDriverConverters.ToSeleniumException(webDriverException);
+            }
+            catch { throw; }
         }
 
         public IWebElement FindElementByClassName(string className)
@@ -202,17 +233,25 @@ namespace Zu.AsyncChromeDriver.SeleniumAdapter
 
         public ReadOnlyCollection<IWebElement> FindElements(By by)
         {
-            var els = syncWebDriver.FindElements(WebDriverConverters.By(by)).Select(v => (IWebElement)new WebElementAdapter(v)).ToList();
-            if (els == null && asyncChromeDriver.Session.ImplicitWait != default(TimeSpan))
+            try
             {
-                var waitEnd = DateTime.Now + asyncChromeDriver.Session.ImplicitWait;
-                while (els == null && DateTime.Now < waitEnd)
-                {
-                    Thread.Sleep(50);
-                    els = syncWebDriver.FindElements(WebDriverConverters.By(by)).Select(v => (IWebElement)new WebElementAdapter(v)).ToList();
-                }
+                var els = syncWebDriver.FindElements(WebDriverConverters.By(by)).Select(v => (IWebElement)new WebElementAdapter(v, this)).ToList();
+                //if (els == null && syncWebDriver.Options().Timeouts.GetImplicitWait() != default(TimeSpan))
+                //{
+                //    var waitEnd = DateTime.Now + syncWebDriver.Options().Timeouts.GetImplicitWait();
+                //    while (els == null && DateTime.Now < waitEnd)
+                //    {
+                //        Thread.Sleep(50);
+                //        els = syncWebDriver.FindElements(WebDriverConverters.By(by)).Select(v => (IWebElement)new WebElementAdapter(v)).ToList();
+                //    }
+                //}
+                return new ReadOnlyCollection<IWebElement>(els);
             }
-            return new ReadOnlyCollection<IWebElement>(els);
+            catch (Zu.WebBrowser.BasicTypes.WebBrowserException webDriverException)
+            {
+                throw WebDriverConverters.ToSeleniumException(webDriverException);
+            }
+            catch { throw; }
         }
 
         public ReadOnlyCollection<IWebElement> FindElementsByClassName(string className)
@@ -257,7 +296,15 @@ namespace Zu.AsyncChromeDriver.SeleniumAdapter
 
         public Screenshot GetScreenshot()
         {
-            return WebDriverConverters.SeleniumScreenshot(syncWebDriver.GetScreenshot());
+            try
+            {
+                return WebDriverConverters.SeleniumScreenshot(syncWebDriver.GetScreenshot());
+            }
+            catch (Zu.WebBrowser.BasicTypes.WebBrowserException webDriverException)
+            {
+                throw WebDriverConverters.ToSeleniumException(webDriverException);
+            }
+            catch { throw; }
         }
 
         public IOptions Manage()

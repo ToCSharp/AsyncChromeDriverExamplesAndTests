@@ -16,27 +16,67 @@ namespace Zu.AsyncChromeDriver.SeleniumAdapter
 
         public void Back()
         {
-            syncNavigation.Back();
+            try
+            {
+                syncNavigation.Back();
+            }
+            catch (Zu.WebBrowser.BasicTypes.WebBrowserException webDriverException)
+            {
+                throw WebDriverConverters.ToSeleniumException(webDriverException);
+            }
+            catch { throw; }
         }
 
         public void Forward()
         {
-            syncNavigation.Forward();
+            try
+            {
+                syncNavigation.Forward();
+            }
+            catch (Zu.WebBrowser.BasicTypes.WebBrowserException webDriverException)
+            {
+                throw WebDriverConverters.ToSeleniumException(webDriverException);
+            }
+            catch { throw; }
         }
 
         public void GoToUrl(string url)
         {
-            syncNavigation.GoToUrl(url);
+            try
+            {
+                syncNavigation.GoToUrl(url);
+            }
+            catch (Zu.WebBrowser.BasicTypes.WebBrowserException webDriverException)
+            {
+                throw WebDriverConverters.ToSeleniumException(webDriverException);
+            }
+            catch { throw; }
         }
 
         public void GoToUrl(Uri url)
         {
-            syncNavigation.GoToUrl(url);
+            try
+            {
+                syncNavigation.GoToUrl(url);
+            }
+            catch (Zu.WebBrowser.BasicTypes.WebBrowserException webDriverException)
+            {
+                throw WebDriverConverters.ToSeleniumException(webDriverException);
+            }
+            catch { throw; }
         }
 
         public void Refresh()
         {
-            syncNavigation.Refresh();
+            try
+            {
+                syncNavigation.Refresh();
+            }
+            catch (Zu.WebBrowser.BasicTypes.WebBrowserException webDriverException)
+            {
+                throw WebDriverConverters.ToSeleniumException(webDriverException);
+            }
+            catch { throw; }
         }
     }
 }
