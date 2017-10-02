@@ -63,6 +63,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ChromeDriver.cs" />
+    <Compile Include="Chrome\ChromeMobileEmulationDeviceSettings.cs" />
+    <Compile Include="ChromeOptions.cs" />
+    <Compile Include="Chrome\ChromePerformanceLoggingPreferences.cs" />
     <Compile Include="WebDriverAdapter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

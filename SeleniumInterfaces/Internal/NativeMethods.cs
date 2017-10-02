@@ -24,13 +24,13 @@ namespace OpenQA.Selenium
     /// <summary>
     /// Provides entry points into needed unmanaged APIs.
     /// </summary>
-    internal static class NativeMethods
+    public static class NativeMethods
     {
         /// <summary>
         /// Values for flags for setting information about a native operating system handle.
         /// </summary>
         [Flags]
-        internal enum HandleInformation
+        public enum HandleInformation
         {
             /// <summary>
             /// No flags are to be set for the handle.
@@ -59,6 +59,6 @@ namespace OpenQA.Selenium
         /// <returns><see langword="true"/> if the information is set; otherwise <see langword="false"/>.</returns>
         [DllImport("kernel32")]
         [return: MarshalAs(UnmanagedType.Bool)]
-        internal static extern bool SetHandleInformation(IntPtr hObject, HandleInformation dwMask, HandleInformation dwFlags);
+        public static extern bool SetHandleInformation(IntPtr hObject, HandleInformation dwMask, HandleInformation dwFlags);
     }
 }

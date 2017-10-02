@@ -1,18 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Threading;
 using BaristaLabs.ChromeDevTools.Runtime.Console;
 using BaristaLabs.ChromeDevTools.Runtime.Debugger;
@@ -506,6 +496,12 @@ namespace AsyncChromeDriverExamplesAndTests
         private void Button_Click_12(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void Button_Click_13(object sender, RoutedEventArgs e)
+        {
+            OpenQA.Selenium.IWebDriver driver = new Zu.AsyncChromeDriver.SeleniumAdapter.ChromeDriver(new OpenQA.Selenium.Chrome.ChromeOptions());
+            driver.Navigate().GoToUrl("http://www.google.co.uk");
         }
     }
 }

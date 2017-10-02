@@ -56,7 +56,17 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Firefox\FirefoxBinary.cs" />
     <Compile Include="FirefoxDriver.cs" />
+    <Compile Include="Firefox\FirefoxDriverLogLevel.cs" />
+    <Compile Include="Firefox\FirefoxExtension.cs" />
+    <Compile Include="FirefoxOptions.cs" />
+    <Compile Include="Firefox\FirefoxProfile.cs" />
+    <Compile Include="Firefox\Internal\Executable.cs" />
+    <Compile Include="Firefox\Internal\ILock.cs" />
+    <Compile Include="Firefox\Internal\IniFileReader.cs" />
+    <Compile Include="Firefox\Internal\SocketLock.cs" />
+    <Compile Include="Firefox\Preferences.cs" />
     <Compile Include="WebDriverAdapter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AsyncChromeDriverExamplesAndTests"
         mc:Ignorable="d"
-        Title="MainWindow" Height="358.924" Width="587.466" Closing="Window_Closing">
+        Title="MainWindow" Height="383.339" Width="653.623" Closing="Window_Closing">
     <Grid>
         <TabControl>
             <TabItem Header="Open">
@@ -128,6 +128,11 @@
                     <TextBlock HorizontalAlignment="Left" Margin="46,11,0,0" TextWrapping="Wrap" Text="element id" VerticalAlignment="Top"/>
                     <Button Content="Listen subtree modification" HorizontalAlignment="Left" Margin="22,38,0,0" VerticalAlignment="Top" Width="175" Click="Button_Click_10"/>
                     <Button Content="Listen attribute modification" HorizontalAlignment="Left" Margin="218,38,0,0" VerticalAlignment="Top" Width="172" Click="Button_Click_11"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="SeleniumAdapter">
+                <Grid Background="#FFE5E5E5">
+                    <Button Content="Button" HorizontalAlignment="Left" Margin="28,26,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click_13"/>
                 </Grid>
             </TabItem>
         </TabControl>

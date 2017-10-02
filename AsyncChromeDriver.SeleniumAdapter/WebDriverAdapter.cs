@@ -1,32 +1,53 @@
 ﻿using OpenQA.Selenium;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Collections.ObjectModel;
-using System.Threading;
-using OpenQA.Selenium.Internal;
-using OpenQA.Selenium.Html5;
-using OpenQA.Selenium.Interactions;
-using System.Collections;
 using Zu.SeleniumAdapter;
 
 namespace Zu.AsyncChromeDriver.SeleniumAdapter
 {
     public class WebDriverAdapter : WebDriverAdapterBase
     {
-        private Zu.Chrome.AsyncChromeDriver asyncChromeDriver;
+        protected Zu.Chrome.AsyncChromeDriver asyncChromeDriver;
 
         public WebDriverAdapter()
-            :this(null)
+            : this("")
         {
         }
         public WebDriverAdapter(string profileName)
         {
-            asyncChromeDriver = profileName == null ? new Zu.Chrome.AsyncChromeDriver() : new Zu.Chrome.AsyncChromeDriver(profileName);
+            asyncChromeDriver = string.IsNullOrWhiteSpace(profileName) ? new Zu.Chrome.AsyncChromeDriver() : new Zu.Chrome.AsyncChromeDriver(profileName);
+            Create(asyncChromeDriver);
+        }
+
+        public WebDriverAdapter(Zu.Chrome.AsyncChromeDriver asyncChromeDriver)
+        {
+            this.asyncChromeDriver = asyncChromeDriver;
+            Create(asyncChromeDriver);
+        }
+
+        public WebDriverAdapter(Zu.Chrome.ChromeDriverConfig config)
+        {
+            this.asyncChromeDriver = new Chrome.AsyncChromeDriver(config);
+            Create(asyncChromeDriver);
+        }
+        
+        public WebDriverAdapter(DriverOptions options)
+        {
+            var config = ConvertDriverOptionsToChromeDriverConfig(options);
+            this.asyncChromeDriver = new Chrome.AsyncChromeDriver(config);
+            Create(asyncChromeDriver);
+        }
+
+        private Zu.Chrome.ChromeDriverConfig ConvertDriverOptionsToChromeDriverConfig(DriverOptions options)
+        {
+            var res = new Chrome.ChromeDriverConfig();
+            //TODO Convert
+            return res;
+        }
+
+        private void Create(Chrome.AsyncChromeDriver asyncChromeDriver)
+        {
             AsyncWebDriver = new Zu.AsyncWebDriver.Remote.WebDriver(asyncChromeDriver);
             SyncWebDriver = new Zu.AsyncWebDriver.Remote.SyncWebDriver(AsyncWebDriver);
             SyncWebDriver.Open();
-            //syncWebDriver.Options().Timeouts.SetImplicitWait(TimeSpan.FromMilliseconds(500));
         }
     }
 }

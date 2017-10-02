@@ -65,6 +65,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="OperaDriver.cs" />
+    <Compile Include="OperaOptions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="WebDriverAdapter.cs" />
   </ItemGroup>

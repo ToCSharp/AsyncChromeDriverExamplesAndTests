@@ -152,6 +152,18 @@
       <Project>{489fd59f-d739-4144-89b8-b5a719bcb120}</Project>
       <Name>AsyncWebDriver</Name>
     </ProjectReference>
+    <ProjectReference Include="..\AsyncChromeDriver.SeleniumAdapter\AsyncChromeDriver.SeleniumAdapter.csproj">
+      <Project>{91ca8b5c-701a-4a23-b4f7-8968c7b80ead}</Project>
+      <Name>AsyncChromeDriver.SeleniumAdapter</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SeleniumAdapter\SeleniumAdapter.csproj">
+      <Project>{8AEF0265-F67F-4FEB-A60F-CE297F0F8493}</Project>
+      <Name>SeleniumAdapter</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SeleniumInterfaces\SeleniumInterfaces.csproj">
+      <Project>{073B243F-0CD4-47C4-8008-17A62D3F0ADC}</Project>
+      <Name>SeleniumInterfaces</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

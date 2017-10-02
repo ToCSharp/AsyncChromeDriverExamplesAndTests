@@ -46,6 +46,7 @@
   <ItemGroup>
     <Compile Include="By.cs" />
     <Compile Include="Cookie.cs" />
+    <Compile Include="DriverOptions.cs" />
     <Compile Include="Exceptions\ElementNotVisibleException.cs" />
     <Compile Include="HTML5\AppCacheStatus.cs" />
     <Compile Include="HTML5\IApplicationCache.cs" />
@@ -147,7 +148,12 @@
     <Compile Include="Exceptions\NotFoundException.cs" />
     <Compile Include="Platform.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Proxy.cs" />
     <Compile Include="Remote\CapabilityType.cs" />
+    <Compile Include="Remote\DesiredCapabilities.cs" />
+    <Compile Include="Remote\ISpecificationCompliant.cs" />
+    <Compile Include="Remote\JsonConverters\CharArrayJsonConverter.cs" />
+    <Compile Include="Remote\JsonConverters\ResponseValueJsonConverter.cs" />
     <Compile Include="Screenshot.cs" />
     <Compile Include="Exceptions\StaleElementReferenceException.cs" />
     <Compile Include="Exceptions\UnhandledAlertException.cs" />
