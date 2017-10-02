@@ -137,6 +137,10 @@
       <Project>{10a3e667-e127-4423-88d4-8ec0a8ae453c}</Project>
       <Name>AsyncFirefoxDriver.SeleniumAdapter</Name>
     </ProjectReference>
+    <ProjectReference Include="..\AsyncOperaDriver.SeleniumAdapter\AsyncOperaDriver.SeleniumAdapter.csproj">
+      <Project>{21013ca6-c1ac-4bd2-84a7-5458a905ec02}</Project>
+      <Name>AsyncOperaDriver.SeleniumAdapter</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SeleniumInterfaces\SeleniumInterfaces.csproj">
       <Project>{073b243f-0cd4-47c4-8008-17a62d3f0adc}</Project>
       <Name>SeleniumInterfaces</Name>
