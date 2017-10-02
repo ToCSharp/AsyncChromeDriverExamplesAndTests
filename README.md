@@ -31,3 +31,5 @@ using OpenQA.Selenium.Chrome;
 to
 using Zu.AsyncChromeDriver.SeleniumAdapter
 ```
+
+## [AsyncFirefoxDriver.SeleniumAdapter](https://github.com/ToCSharp/AsyncChromeDriverExamplesAndTests/tree/master/AsyncFirefoxDriver.SeleniumAdapter)
