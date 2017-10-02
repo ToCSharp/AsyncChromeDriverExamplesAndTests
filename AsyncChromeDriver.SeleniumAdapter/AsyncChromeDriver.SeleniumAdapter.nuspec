@@ -12,6 +12,6 @@
     <description>$description$</description>
     <releaseNotes>Initial release.</releaseNotes>
     <copyright>Copyright Oleg Zudov 2017</copyright>
-    <tags>Chrome DevTools AsyncChromeDriver AsyncWebDriver WebDriver Selenuim</tags>
+    <tags>Chrome DevTools AsyncChromeDriver AsyncWebDriver WebDriver Selenium</tags>
   </metadata>
 </package>

@@ -12,6 +12,6 @@
     <description>$description$</description>
     <releaseNotes>Initial release.</releaseNotes>
     <copyright>Copyright Oleg Zudov 2017</copyright>
-    <tags>Firefox AsyncFirefoxDriver AsyncWebDriver WebDriver Selenium</tags>
+    <tags>Opera DevTools AsyncOperaDriver AsyncWebDriver WebDriver Selenium</tags>
   </metadata>
 </package>

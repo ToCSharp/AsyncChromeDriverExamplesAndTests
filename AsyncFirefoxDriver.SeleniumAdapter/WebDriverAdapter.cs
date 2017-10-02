@@ -1,14 +1,4 @@
-﻿using OpenQA.Selenium;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Collections.ObjectModel;
-using System.Threading;
-using OpenQA.Selenium.Internal;
-using OpenQA.Selenium.Html5;
-using OpenQA.Selenium.Interactions;
-using System.Collections;
-using Zu.SeleniumAdapter;
+﻿using Zu.SeleniumAdapter;
 
 namespace Zu.AsyncFirefoxDriver.SeleniumAdapter
 {
