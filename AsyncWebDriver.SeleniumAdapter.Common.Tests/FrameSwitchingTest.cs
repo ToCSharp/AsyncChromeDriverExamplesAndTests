@@ -306,6 +306,7 @@ namespace OpenQA.Selenium
         }
 
         [Test]
+        [NeedsFreshDriver(IsCreatedAfterTest = true)]
         public void ShouldFocusOnTheReplacementWhenAFrameFollowsALinkToA_TopTargettedPage()
         {
             driver.Url = framesetPage;
