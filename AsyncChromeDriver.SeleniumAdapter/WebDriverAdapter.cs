@@ -10,22 +10,20 @@ using OpenQA.Selenium.Interactions;
 using System.Collections;
 using Zu.SeleniumAdapter;
 
-namespace Zu.AsyncFirefoxDriver.SeleniumAdapter
+namespace Zu.AsyncChromeDriver.SeleniumAdapter
 {
     public class WebDriverAdapter : WebDriverAdapterBase
     {
-        private Zu.Firefox.AsyncFirefoxDriver asyncFirefoxDriver;
+        private Zu.Chrome.AsyncChromeDriver asyncChromeDriver;
 
         public WebDriverAdapter()
             :this(null)
         {
-
         }
-
         public WebDriverAdapter(string profileName)
         {
-            asyncFirefoxDriver = profileName == null ? new Zu.Firefox.AsyncFirefoxDriver() : new Zu.Firefox.AsyncFirefoxDriver(profileName);
-            AsyncWebDriver = new Zu.AsyncWebDriver.Remote.WebDriver(asyncFirefoxDriver);
+            asyncChromeDriver = profileName == null ? new Zu.Chrome.AsyncChromeDriver() : new Zu.Chrome.AsyncChromeDriver(profileName);
+            AsyncWebDriver = new Zu.AsyncWebDriver.Remote.WebDriver(asyncChromeDriver);
             SyncWebDriver = new Zu.AsyncWebDriver.Remote.SyncWebDriver(AsyncWebDriver);
             SyncWebDriver.Open();
             //syncWebDriver.Options().Timeouts.SetImplicitWait(TimeSpan.FromMilliseconds(500));

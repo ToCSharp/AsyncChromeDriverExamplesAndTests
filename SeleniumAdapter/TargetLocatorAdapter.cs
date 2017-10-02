@@ -1,14 +1,14 @@
 ﻿using OpenQA.Selenium;
 using Zu.AsyncWebDriver.Remote;
 
-namespace Zu.AsyncChromeDriver.SeleniumAdapter
+namespace Zu.SeleniumAdapter
 {
     public class TargetLocatorAdapter : ITargetLocator
     {
         private SyncRemoteTargetLocator syncRemoteTargetLocator;
-        private WebDriverAdapter webDriver;
+        private IWebDriverAdapter webDriver;
 
-        public TargetLocatorAdapter(SyncRemoteTargetLocator syncRemoteTargetLocator, WebDriverAdapter webDriver)
+        public TargetLocatorAdapter(SyncRemoteTargetLocator syncRemoteTargetLocator, IWebDriverAdapter webDriver)
         {
             this.syncRemoteTargetLocator = syncRemoteTargetLocator;
             this.webDriver = webDriver;

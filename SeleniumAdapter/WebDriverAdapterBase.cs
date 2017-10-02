@@ -8,39 +8,28 @@ using OpenQA.Selenium.Internal;
 using OpenQA.Selenium.Html5;
 using OpenQA.Selenium.Interactions;
 using System.Collections;
+using Zu.SeleniumAdapter;
 
-namespace Zu.AsyncChromeDriver.SeleniumAdapter
+namespace Zu.SeleniumAdapter
 {
-    public class WebDriverAdapter : IWebDriver, ISearchContext, IJavaScriptExecutor, IFindsById, IFindsByClassName, IFindsByLinkText, IFindsByName, IFindsByTagName, IFindsByXPath, IFindsByPartialLinkText, IFindsByCssSelector, ITakesScreenshot, IHasInputDevices,/* IHasCapabilities, */IHasWebStorage, IHasLocationContext, IHasApplicationCache, /*IAllowsFileDetection, IHasSessionId, */IActionExecutor
+    public class WebDriverAdapterBase : IWebDriverAdapter
     {
-        private Zu.Chrome.AsyncChromeDriver asyncChromeDriver;
-        private Zu.AsyncWebDriver.Remote.WebDriver asyncWebDriver;
-        private Zu.AsyncWebDriver.Remote.SyncWebDriver syncWebDriver;
+        public Zu.AsyncWebDriver.Remote.WebDriver AsyncWebDriver;
+        public Zu.AsyncWebDriver.Remote.SyncWebDriver SyncWebDriver;
 
-        public WebDriverAdapter()
-            :this(null)
-        {
-        }
-        public WebDriverAdapter(string profileName)
-        {
-            asyncChromeDriver = profileName == null ? new Zu.Chrome.AsyncChromeDriver() : new Zu.Chrome.AsyncChromeDriver(profileName);
-            asyncWebDriver = new Zu.AsyncWebDriver.Remote.WebDriver(asyncChromeDriver);
-            syncWebDriver = new Zu.AsyncWebDriver.Remote.SyncWebDriver(asyncWebDriver);
-            //syncWebDriver.Options().Timeouts.SetImplicitWait(TimeSpan.FromMilliseconds(500));
-        }
-        public string Url { get => syncWebDriver.Url; set => Navigate().GoToUrl(value); }
+        public string Url { get => SyncWebDriver.Url; set => Navigate().GoToUrl(value); }
 
-        public string Title => syncWebDriver.Title();
+        public string Title => SyncWebDriver.Title();
 
-        public string PageSource => syncWebDriver.PageSource();
+        public string PageSource => SyncWebDriver.PageSource();
 
-        public string CurrentWindowHandle => syncWebDriver.CurrentWindowHandle;
+        public string CurrentWindowHandle => SyncWebDriver.CurrentWindowHandle;
 
-        public ReadOnlyCollection<string> WindowHandles => new ReadOnlyCollection<string>(syncWebDriver.WindowHandles());
+        public ReadOnlyCollection<string> WindowHandles => new ReadOnlyCollection<string>(SyncWebDriver.WindowHandles());
 
-        public IKeyboard Keyboard => new KeyboardAdapter(syncWebDriver.Keyboard);
+        public IKeyboard Keyboard => new KeyboardAdapter(SyncWebDriver.Keyboard);
 
-        public IMouse Mouse => new MouseAdapter(syncWebDriver.Mouse);
+        public IMouse Mouse => new MouseAdapter(SyncWebDriver.Mouse);
 
         public bool HasWebStorage => throw new NotImplementedException();
 
@@ -58,7 +47,7 @@ namespace Zu.AsyncChromeDriver.SeleniumAdapter
 
         public void Close()
         {
-            asyncChromeDriver.CloseSync();
+            SyncWebDriver.Close();
         }
 
         public void Dispose()
@@ -71,7 +60,7 @@ namespace Zu.AsyncChromeDriver.SeleniumAdapter
             object res = null;
             try
             {
-                res = syncWebDriver.ExecuteAsyncScript(script, ReplaceWebElementsInArgs(args));
+                res = SyncWebDriver.ExecuteAsyncScript(script, ReplaceWebElementsInArgs(args));
             }
             catch (Zu.WebBrowser.BasicTypes.WebBrowserException webDriverException)
             {
@@ -87,7 +76,7 @@ namespace Zu.AsyncChromeDriver.SeleniumAdapter
             object res = null;
             try
             {
-                res = syncWebDriver.ExecuteScript(script, ReplaceWebElementsInArgs(args));
+                res = SyncWebDriver.ExecuteScript(script, ReplaceWebElementsInArgs(args));
             }
             catch (Zu.WebBrowser.BasicTypes.WebBrowserException webDriverException)
             {
@@ -172,7 +161,7 @@ namespace Zu.AsyncChromeDriver.SeleniumAdapter
         {
             try
             {
-                var el = syncWebDriver.FindElement(WebDriverConverters.By(by));
+                var el = SyncWebDriver.FindElement(WebDriverConverters.By(by));
                 //if (el == null && syncWebDriver.Options().Timeouts.GetImplicitWait() != default(TimeSpan))
                 //{
                 //    var waitEnd = DateTime.Now + syncWebDriver.Options().Timeouts.GetImplicitWait();
@@ -235,7 +224,7 @@ namespace Zu.AsyncChromeDriver.SeleniumAdapter
         {
             try
             {
-                var els = syncWebDriver.FindElements(WebDriverConverters.By(by)).Select(v => (IWebElement)new WebElementAdapter(v, this)).ToList();
+                var els = SyncWebDriver.FindElements(WebDriverConverters.By(by)).Select(v => (IWebElement)new WebElementAdapter(v, this)).ToList();
                 //if (els == null && syncWebDriver.Options().Timeouts.GetImplicitWait() != default(TimeSpan))
                 //{
                 //    var waitEnd = DateTime.Now + syncWebDriver.Options().Timeouts.GetImplicitWait();
@@ -298,7 +287,7 @@ namespace Zu.AsyncChromeDriver.SeleniumAdapter
         {
             try
             {
-                return WebDriverConverters.SeleniumScreenshot(syncWebDriver.GetScreenshot());
+                return WebDriverConverters.SeleniumScreenshot(SyncWebDriver.GetScreenshot());
             }
             catch (Zu.WebBrowser.BasicTypes.WebBrowserException webDriverException)
             {
@@ -309,32 +298,32 @@ namespace Zu.AsyncChromeDriver.SeleniumAdapter
 
         public IOptions Manage()
         {
-            return new WebDriverOptionsAdapter(syncWebDriver.Options());
+            return new WebDriverOptionsAdapter(SyncWebDriver.Options());
         }
 
         public INavigation Navigate()
         {
-            return new NavigateAdapter(syncWebDriver.Navigate());
+            return new NavigateAdapter(SyncWebDriver.Navigate());
         }
 
         public void PerformActions(IList<ActionSequence> actionSequenceList)
         {
-            syncWebDriver.PerformActions(WebDriverConverters.SeleniumActionSequenceList(syncWebDriver, actionSequenceList));
+            SyncWebDriver.PerformActions(WebDriverConverters.SeleniumActionSequenceList(SyncWebDriver, actionSequenceList));
         }
 
         public void Quit()
         {
-            asyncChromeDriver.CloseSync();
+            SyncWebDriver.Close();
         }
 
         public void ResetInputState()
         {
-            syncWebDriver.ResetInputState();
+            SyncWebDriver.ResetInputState();
         }
 
         public ITargetLocator SwitchTo()
         {
-            return new TargetLocatorAdapter(syncWebDriver.SwitchTo(), this);
+            return new TargetLocatorAdapter(SyncWebDriver.SwitchTo(), this);
         }
     }
 }

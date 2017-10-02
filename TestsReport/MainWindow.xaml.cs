@@ -54,6 +54,7 @@ namespace TestsReport
                         }
                     }
                     path = Path.Combine(path, "..");
+                    if (!Directory.Exists(path)) break;
                 }
                 while (nunitPath == "");
                 tbNunitConsole.Text = nunitPath == "" ? "no nunit3-console.exe" : nunitPath;
@@ -79,6 +80,7 @@ namespace TestsReport
                         }
                     }
                     path = Path.Combine(path, "..");
+                    if (!Directory.Exists(path)) break;
                 }
                 while (testDllPath == "");
                 tbTestDll.Text = testDllPath == "" ? "no AsyncWebDriver.SeleniumAdapter.Common.Tests.dll" : testDllPath;
@@ -124,6 +126,7 @@ namespace TestsReport
                 var path = "";
                 while (nunitReportPath == "")
                 {
+                    if (!Directory.Exists(path)) break;
                     var packages = Path.Combine(path, "packages");
                     if (Directory.Exists(packages))
                     {

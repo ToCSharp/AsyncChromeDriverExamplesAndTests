@@ -2,7 +2,7 @@
 using OpenQA.Selenium;
 using Zu.AsyncWebDriver.Remote;
 
-namespace Zu.AsyncChromeDriver.SeleniumAdapter
+namespace Zu.SeleniumAdapter
 {
     internal class WebDriverTimeoutsAdapter : OpenQA.Selenium.ITimeouts
     {

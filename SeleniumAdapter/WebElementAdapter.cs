@@ -8,14 +8,14 @@ using OpenQA.Selenium.Interactions.Internal;
 using System.Collections.Generic;
 using System.Threading;
 
-namespace Zu.AsyncChromeDriver.SeleniumAdapter
+namespace Zu.SeleniumAdapter
 {
     public class WebElementAdapter : IWebElement, IFindsByLinkText, IFindsById, IFindsByName, IFindsByTagName, IFindsByClassName, IFindsByXPath, IFindsByPartialLinkText, IFindsByCssSelector, IWrapsDriver, ILocatable, ITakesScreenshot, IWebElementReference
     {
         private SyncWebElement syncWebElement;
-        private WebDriverAdapter driver;
+        private IWebDriverAdapter driver;
 
-        public WebElementAdapter(SyncWebElement syncWebElement, WebDriverAdapter driver)
+        public WebElementAdapter(SyncWebElement syncWebElement, IWebDriverAdapter driver)
         {
             this.syncWebElement = syncWebElement;
             this.driver = driver;

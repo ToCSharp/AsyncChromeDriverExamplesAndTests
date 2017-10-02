@@ -3,9 +3,9 @@ using OpenQA.Selenium;
 using Zu.AsyncWebDriver.Remote;
 using Zu.WebBrowser.AsyncInteractions;
 
-namespace Zu.AsyncChromeDriver.SeleniumAdapter
+namespace Zu.SeleniumAdapter
 {
-    internal class NavigateAdapter : OpenQA.Selenium.INavigation
+    public class NavigateAdapter : OpenQA.Selenium.INavigation
     {
         private SyncNavigation syncNavigation;
 

@@ -1,7 +1,7 @@
 ﻿using OpenQA.Selenium;
 using Zu.AsyncWebDriver.Remote;
 
-namespace Zu.AsyncChromeDriver.SeleniumAdapter
+namespace Zu.SeleniumAdapter
 {
     public class KeyboardAdapter : IKeyboard
     {

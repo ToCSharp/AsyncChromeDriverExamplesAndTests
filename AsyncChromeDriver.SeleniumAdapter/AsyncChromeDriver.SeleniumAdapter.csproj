@@ -33,8 +33,8 @@
     <Reference Include="AsyncChromeDriver, Version=0.2.8.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\AsyncChromeDriver.0.2.8\lib\net461\AsyncChromeDriver.dll</HintPath>
     </Reference>
-    <Reference Include="AsyncWebDriver, Version=1.2.10.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\AsyncWebDriver.1.2.10\lib\net452\AsyncWebDriver.dll</HintPath>
+    <Reference Include="AsyncWebDriver, Version=1.2.11.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\AsyncWebDriver.1.2.11\lib\net452\AsyncWebDriver.dll</HintPath>
     </Reference>
     <Reference Include="BaristaLabs.ChromeDevTools.Runtime.Framework, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\AsyncChromeDriver.0.2.8\lib\net461\BaristaLabs.ChromeDevTools.Runtime.Framework.dll</HintPath>
@@ -62,18 +62,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Chrome\Alert.cs" />
-    <Compile Include="Chrome\ChromeDriver.cs" />
-    <Compile Include="Chrome\CoordinatesAdapter.cs" />
-    <Compile Include="Chrome\KeyboardAdapter.cs" />
-    <Compile Include="Chrome\MouseAdapter.cs" />
-    <Compile Include="Chrome\NavigateAdapter.cs" />
-    <Compile Include="Chrome\TargetLocatorAdapter.cs" />
-    <Compile Include="Chrome\WebDriverAdapter.cs" />
-    <Compile Include="Chrome\WebDriverConverters.cs" />
-    <Compile Include="Chrome\WebDriverOptionsAdapter.cs" />
-    <Compile Include="Chrome\WebDriverTimeoutsAdapter.cs" />
-    <Compile Include="Chrome\WebElementAdapter.cs" />
+    <Compile Include="ChromeDriver.cs" />
+    <Compile Include="WebDriverAdapter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -81,6 +71,10 @@
     <None Include="README.md" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\SeleniumAdapter\SeleniumAdapter.csproj">
+      <Project>{8aef0265-f67f-4feb-a60f-ce297f0f8493}</Project>
+      <Name>SeleniumAdapter</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SeleniumInterfaces\SeleniumInterfaces.csproj">
       <Project>{073b243f-0cd4-47c4-8008-17a62d3f0adc}</Project>
       <Name>SeleniumInterfaces</Name>

@@ -8,7 +8,7 @@ using Zu.AsyncWebDriver.Remote;
 using Zu.WebBrowser.BasicTypes;
 using System.Linq;
 
-namespace Zu.AsyncChromeDriver.SeleniumAdapter
+namespace Zu.SeleniumAdapter
 {
     public class WebDriverConverters
     {
@@ -26,18 +26,18 @@ namespace Zu.AsyncChromeDriver.SeleniumAdapter
             throw new NotSupportedException(description);
         }
 
-        internal static OpenQA.Selenium.Screenshot SeleniumScreenshot(Zu.WebBrowser.BasicTypes.Screenshot screenshot)
+        public static OpenQA.Selenium.Screenshot SeleniumScreenshot(Zu.WebBrowser.BasicTypes.Screenshot screenshot)
         {
             return new OpenQA.Selenium.Screenshot(screenshot.AsBase64EncodedString);
         }
 
-        internal static Point ToDrawingPoint(WebPoint webPoint)
+        public static Point ToDrawingPoint(WebPoint webPoint)
         {
             return new Point(webPoint.X, webPoint.Y);
         }
 
 
-        internal static IList<Zu.WebBrowser.BasicTypes.ActionSequence> SeleniumActionSequenceList(SyncWebDriver syncWebDriver, IList<OpenQA.Selenium.Interactions.ActionSequence> actionSequenceList)
+        public static IList<Zu.WebBrowser.BasicTypes.ActionSequence> SeleniumActionSequenceList(SyncWebDriver syncWebDriver, IList<OpenQA.Selenium.Interactions.ActionSequence> actionSequenceList)
         {
             var actions = new Zu.AsyncWebDriver.Interactions.Actions(syncWebDriver.AsyncDriver);
             var res = new List<Zu.WebBrowser.BasicTypes.ActionSequence>();
@@ -162,6 +162,8 @@ namespace Zu.AsyncChromeDriver.SeleniumAdapter
                     return new OpenQA.Selenium.WebDriverTimeoutException(webDriverException.Message);
                 case "invalid operation":
                     return new InvalidOperationException(webDriverException.Message);
+                case "invalid argument":
+                    return new ElementNotVisibleException(webDriverException.Message);
             }
             return new ArgumentOutOfRangeException(nameof(webDriverException), webDriverException.Error);
         }
