@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{9B39074F-38C4-40D2-99FA-494D421E2013}</ProjectGuid>
+    <ProjectGuid>{96EE2BE1-76BC-43B6-8DFC-A615836F309E}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>AsyncChromeDriverExamplesAndTests</RootNamespace>
-    <AssemblyName>AsyncChromeDriverExamplesAndTests</AssemblyName>
+    <RootNamespace>AsyncFirefoxDriverTest</RootNamespace>
+    <AssemblyName>AsyncFirefoxDriverTest</AssemblyName>
     <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -34,28 +34,25 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="IAsyncWebBrowserClient, Version=0.1.9.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\IAsyncWebBrowserClient.0.1.9\lib\net452\IAsyncWebBrowserClient.dll</HintPath>
+    <Reference Include="AsyncWebDriver, Version=1.2.11.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\AsyncWebDriver.1.2.11\lib\net452\AsyncWebDriver.dll</HintPath>
+    </Reference>
+    <Reference Include="IAsyncWebBrowserClient, Version=0.1.8.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\IAsyncWebBrowserClient.0.1.8\lib\net452\IAsyncWebBrowserClient.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Drawing" />
-    <Reference Include="System.Threading.Tasks.Dataflow, Version=4.6.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Threading.Tasks.Dataflow.4.8.0\lib\netstandard2.0\System.Threading.Tasks.Dataflow.dll</HintPath>
-    </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Net.Http" />
     <Reference Include="System.Xaml">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
-    </Reference>
-    <Reference Include="WebSocket4Net, Version=0.14.1.0, Culture=neutral, PublicKeyToken=eb4e154b696bf72a, processorArchitecture=MSIL">
-      <HintPath>..\packages\WebSocket4Net.0.14.1\lib\net45\WebSocket4Net.dll</HintPath>
     </Reference>
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
@@ -107,62 +104,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="data\screenshot3.png" />
-    <Resource Include="data\screenshot4.png" />
-    <Content Include="html\js\jquery-1.4.4.min.js">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="html\js\jquery-3.2.1.min.js">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="html\js\jquery-ui-1.8.10.custom.min.js">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="html\ok.html">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="html\myclicks.html">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="selenium_common_src_web\clicks.html" />
-    <Resource Include="selenium_common_src_web\icon.gif" />
-    <Content Include="selenium_common_src_web\js\jquery-1.4.4.min.js">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="selenium_common_src_web\js\jquery-ui-1.8.10.custom.min.js">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="selenium_common_src_web\mouseOver.html">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="selenium_common_src_web\mousePositionTracker.html">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\AsyncChromeDriver\AsyncChromeDriver\AsyncChromeDriver.csproj">
-      <Project>{b397ff4b-9290-478f-bb70-da91d23e4b68}</Project>
-      <Name>AsyncChromeDriver</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\AsyncChromeDriver\BaristaLabs.chrome-dev-tools-runtime\BaristaLabs.ChromeDevTools.Runtime.NetFramework\BaristaLabs.ChromeDevTools.Runtime.NetFramework.csproj">
-      <Project>{6f8eb349-fd03-41a7-9434-117ce10c999e}</Project>
-      <Name>BaristaLabs.ChromeDevTools.Runtime.NetFramework</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\AsyncWebDriver\AsyncWebDriver\AsyncWebDriver.csproj">
-      <Project>{489fd59f-d739-4144-89b8-b5a719bcb120}</Project>
-      <Name>AsyncWebDriver</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\AsyncChromeDriver.SeleniumAdapter\AsyncChromeDriver.SeleniumAdapter.csproj">
-      <Project>{91ca8b5c-701a-4a23-b4f7-8968c7b80ead}</Project>
-      <Name>AsyncChromeDriver.SeleniumAdapter</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\SeleniumAdapter\SeleniumAdapter.csproj">
-      <Project>{8AEF0265-F67F-4FEB-A60F-CE297F0F8493}</Project>
-      <Name>SeleniumAdapter</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\SeleniumInterfaces\SeleniumInterfaces.csproj">
-      <Project>{073B243F-0CD4-47C4-8008-17A62D3F0ADC}</Project>
-      <Name>SeleniumInterfaces</Name>
+    <ProjectReference Include="..\..\AsyncWebDriver\AsyncFirefoxDriver\AsyncFirefoxDriver.csproj">
+      <Project>{13891dba-94c7-45aa-b9bd-77ac7b56c379}</Project>
+      <Name>AsyncFirefoxDriver</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

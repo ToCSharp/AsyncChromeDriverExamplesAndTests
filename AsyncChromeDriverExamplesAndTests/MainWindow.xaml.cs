@@ -9,6 +9,7 @@ using BaristaLabs.ChromeDevTools.Runtime.Debugger;
 using Zu.AsyncWebDriver.Remote;
 using Zu.Chrome;
 using Zu.WebBrowser.BasicTypes;
+using System.Collections.Generic;
 
 namespace AsyncChromeDriverExamplesAndTests
 {
@@ -24,17 +25,25 @@ namespace AsyncChromeDriverExamplesAndTests
         {
             InitializeComponent();
         }
-
-        #region OpenTab
-
-        private async void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+       private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             if (webDriver != null)
             {
-                await webDriver.Close();
+                webDriver.CloseSync();
+            }
+            foreach (var item in driversToClose)
+            {
+                try
+                {
+                    item?.CloseSync();
+                }
+                catch { }
             }
         }
 
+        #region OpenTab
+
+ 
         private async void OpenTab_Button_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -370,6 +379,8 @@ namespace AsyncChromeDriverExamplesAndTests
         }
 
         bool listeningDebugger = false;
+        private List<AsyncChromeDriver> driversToClose = new List<AsyncChromeDriver>();
+
         private async void Button_Click_10(object sender, RoutedEventArgs e)
         {
             try
@@ -502,6 +513,35 @@ namespace AsyncChromeDriverExamplesAndTests
         {
             OpenQA.Selenium.IWebDriver driver = new Zu.AsyncChromeDriver.SeleniumAdapter.ChromeDriver(new OpenQA.Selenium.Chrome.ChromeOptions());
             driver.Navigate().GoToUrl("http://www.google.co.uk");
+        }
+
+        private void Button_Click_14(object sender, RoutedEventArgs e)
+        {
+        }
+
+        private async void Button_Click_15(object sender, RoutedEventArgs e)
+        {
+            var drv1 = new AsyncChromeDriver();
+            var drv2 = new AsyncChromeDriver();
+            driversToClose.Add(drv1);
+            driversToClose.Add(drv2);
+            await drv1.Connect();
+            await drv2.Connect();
+            await drv2.Navigation.GoToUrl("http://www.google.co.uk");
+        }
+
+        private async void Button_Click_16(object sender, RoutedEventArgs e)
+        {
+            var drv1 = new AsyncChromeDriver();
+            var drv2 = new AsyncChromeDriver();
+            var drv3 = new AsyncChromeDriver();
+            driversToClose.Add(drv1);
+            driversToClose.Add(drv2);
+            driversToClose.Add(drv3);
+            await drv1.Connect();
+            await drv2.Connect();
+            await drv3.Connect();
+            await drv2.Navigation.GoToUrl("http://www.google.co.uk");
         }
     }
 }

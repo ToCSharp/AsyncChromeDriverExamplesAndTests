@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AsyncChromeDriverExamplesAndTests"
         mc:Ignorable="d"
-        Title="MainWindow" Height="383.339" Width="653.623" Closing="Window_Closing">
+        Title="MainWindow" Height="398.81" Width="695.965" Closing="Window_Closing">
     <Grid>
         <TabControl>
             <TabItem Header="Open">
@@ -133,6 +133,13 @@
             <TabItem Header="SeleniumAdapter">
                 <Grid Background="#FFE5E5E5">
                     <Button Content="Button" HorizontalAlignment="Left" Margin="28,26,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click_13"/>
+                    <Button Content="Button" HorizontalAlignment="Left" Margin="136,26,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click_14"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Test">
+                <Grid Background="#FFE5E5E5">
+                    <Button Content="2 Chrome Drivers" HorizontalAlignment="Left" Margin="50,37,0,0" VerticalAlignment="Top" Width="132" Click="Button_Click_15"/>
+                    <Button Content="3 Chrome Drivers" HorizontalAlignment="Left" Margin="198,39,0,0" VerticalAlignment="Top" Width="160" Click="Button_Click_16"/>
                 </Grid>
             </TabItem>
         </TabControl>
