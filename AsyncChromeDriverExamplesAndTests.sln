@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26730.16
+VisualStudioVersion = 15.0.27004.2005
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AsyncChromeDriverExamplesAndTests", "AsyncChromeDriverExamplesAndTests\AsyncChromeDriverExamplesAndTests.csproj", "{9B39074F-38C4-40D2-99FA-494D421E2013}"
 EndProject
@@ -41,6 +41,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SeleniumAdapter", "SeleniumAdapter\SeleniumAdapter.csproj", "{8AEF0265-F67F-4FEB-A60F-CE297F0F8493}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AsyncOperaDriver.SeleniumAdapter", "AsyncOperaDriver.SeleniumAdapter\AsyncOperaDriver.SeleniumAdapter.csproj", "{21013CA6-C1AC-4BD2-84A7-5458A905EC02}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AsyncOperaDriver", "..\AsyncOperaDriver\AsyncOperaDriver\AsyncOperaDriver.csproj", "{2C66F801-3F4A-45C2-8D1E-F5338E0C795C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -112,6 +114,10 @@ Global
 		{21013CA6-C1AC-4BD2-84A7-5458A905EC02}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{21013CA6-C1AC-4BD2-84A7-5458A905EC02}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{21013CA6-C1AC-4BD2-84A7-5458A905EC02}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2C66F801-3F4A-45C2-8D1E-F5338E0C795C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2C66F801-3F4A-45C2-8D1E-F5338E0C795C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2C66F801-3F4A-45C2-8D1E-F5338E0C795C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2C66F801-3F4A-45C2-8D1E-F5338E0C795C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
